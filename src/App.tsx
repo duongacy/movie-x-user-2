@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Register from './pages/Account/Register';
+import Login from './pages/Account/Login';
+import MyAccount from './pages/Account/MyAccount';
+import Home from './pages/Home/Home';
+import Detail from './pages/Detail/Detail';
+import TicketBooking from './pages/TiketBooking/TicketBooking';
+import AccountTemplate from './templates/AccountTemplate/AccountTemplate';
+import FeatureTemplate from './templates/FeatureTemplate/FeatureTemplate';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Router>
+            <Switch>
+                <Route exact path="/register">
+                    <AccountTemplate>
+                        <Register />
+                    </AccountTemplate>
+                </Route>
+                <Route exact path="/login">
+                    <AccountTemplate>
+                        <Login />
+                    </AccountTemplate>
+                </Route>
+                <Route exact path="/my-account">
+                    <FeatureTemplate>
+                        <MyAccount />
+                    </FeatureTemplate>
+                </Route>
+                <Route exact path="/">
+                    <FeatureTemplate>
+                        <Home />
+                    </FeatureTemplate>
+                </Route>
+
+                <Route exact path="/detail/:id">
+                    <FeatureTemplate>
+                        <Detail />
+                    </FeatureTemplate>
+                </Route>
+
+                <Route exact path="/ticket-booking/:id">
+                    <FeatureTemplate>
+                        <TicketBooking />
+                    </FeatureTemplate>
+                </Route>
+            </Switch>
+        </Router>
+    );
 }
 
 export default App;
