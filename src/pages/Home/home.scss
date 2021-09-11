@@ -1,0 +1,94 @@
+/* ---------------------------- trailer-carousel ---------------------------- */
+.trailer-carousel {
+    .carousel-inner {
+        height: 100%;
+    }
+    .carousel-item {
+        height: 100%;
+    }
+    .ytp-pause-overlay-controls-hidden.ytp-pause-overlay {
+        display: none !important;
+    }
+    .overlay-prevent {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        z-index: 1;
+        width: 70%;
+        padding: 0;
+        border: 0;
+        opacity: 0.5;
+        left: 15%;
+        right: 15%;
+    }
+}
+/* -------------------------------------------------------------------------- */
+
+/* ------------------------------- film-block ------------------------------- */
+.film-block {
+    .rec-arrow {
+        background-color: gray;
+        position: absolute;
+        z-index: 10;
+    }
+    .rec-arrow-right {
+        right: 0;
+    }
+    .rec-arrow-left {
+        left: 0;
+    }
+    .rec-arrow:not(:disabled) {
+        &:hover {
+            background-color: red;
+            transform: scale(1.1);
+        }
+    }
+
+    .rec-arrow-left:not(:disabled) {
+        &:active {
+            transform: translateX(-5px);
+        }
+    }
+    .rec-arrow-right:not(:disabled) {
+        &:active {
+            transform: translateX(5px);
+        }
+    }
+    .rec-carousel {
+        position: relative;
+    }
+}
+/* -------------------------------------------------------------------------- */
+
+/* -------------------------------- showtime -------------------------------- */
+.showtime {
+    .multiplex-item {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        cursor: pointer;
+        position: relative;
+        &__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #00000030;
+            z-index: 10;
+            &:hover {
+                background-color: #00000010;
+            }
+        }
+    }
+
+    .cinema-item {
+        cursor: pointer;
+        transition: all 1s;
+        background-color: #ffffff10;
+        &:hover {
+            background-color: #ffffff30;
+        }
+    }
+}
+/* -------------------------------------------------------------------------- */

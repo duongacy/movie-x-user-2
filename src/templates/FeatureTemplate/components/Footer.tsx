@@ -1,14 +1,14 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Col, Container, Dropdown, Row } from 'react-bootstrap';
 
 interface Props {}
 
 const Footer = (props: Props) => {
     return (
-        <footer className="footer bg-secondary pt-5">
-            <Container className="text-light" >
-                <Row className="mb-3">
-                    <Col md={6}>
+        <footer className="footer bg-dark py-2">
+            <Container className="text-light py-3">
+                <Row>
+                    <Col md={6} className="my-2">
                         <div className="d-flex">
                             <i className="fab fa-bootstrap fa-4x me-2" />
                             <p className="fw-bold fs-2" style={{ lineHeight: '64px' }}>
@@ -26,7 +26,7 @@ const Footer = (props: Props) => {
                             <small>Hotline: 1900 545 436</small>
                         </div>
                     </Col>
-                    <Col md={6} lg={2}>
+                    <Col md={6} lg={2} className="my-2">
                         <p className="fs-5 fw-bold">Resources</p>
                         <ul className="list-unstyled">
                             <li>
@@ -56,7 +56,7 @@ const Footer = (props: Props) => {
                             </li>
                         </ul>
                     </Col>
-                    <Col md={6} lg={2}>
+                    <Col md={6} lg={2} className="my-2">
                         <p className="fs-5 fw-bold">Community</p>
                         <ul className="list-unstyled">
                             <li>
@@ -79,7 +79,7 @@ const Footer = (props: Props) => {
                             </li>
                         </ul>
                     </Col>
-                    <Col md={6} lg={2}>
+                    <Col md={6} lg={2} className="my-2">
                         <p className="fs-5 fw-bold">Mobile app</p>
                         <ul className="list-unstyled d-flex" style={{ gap: '8px' }}>
                             <li>
@@ -107,9 +107,9 @@ const Footer = (props: Props) => {
                         </ul>
                     </Col>
                 </Row>
-                {/* <span className="text-muted">Place sticky footer content here.</span> */}
+                <Dropdown.Divider />
             </Container>
-            <div className="bg-dark py-3 text-center">
+            <div className="bg-dark pb-3 text-center">
                 <Container>
                     <span className="text-light ">
                         Design by <span className="fw-bold">YDT Team</span>{' '}

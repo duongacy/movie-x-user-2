@@ -1,5 +1,4 @@
 import React from 'react';
-import { Alert, Col, Container, Nav, Navbar, NavDropdown, Row } from 'react-bootstrap';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
