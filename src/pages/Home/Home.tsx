@@ -1,12 +1,17 @@
 import Trailer from './components/Trailer';
 import './home.scss';
 import FilmBlock from './components/FilmBlock';
-import { Container, Figure, Button, Row, Col } from 'react-bootstrap';
 import Showtimes from './components/Showtimes';
+import { getShowtimeByFilmService } from '../../services/film.services';
+import { useEffect } from 'react';
 
 interface Props {}
 
 const Home = (props: Props) => {
+    useEffect(() => {
+        getShowtimeByFilmService(1282);
+    }, []);
+
     return (
         <div className="bg-secondary">
             <Trailer />
