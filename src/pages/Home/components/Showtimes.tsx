@@ -1,40 +1,37 @@
+import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Button } from 'react-bootstrap';
+import { Col, Container, Row, Button, Ratio, Dropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getShowtimeByFilm } from '../../../app/homeSlice';
+import { getAllMultiplex, getAllShowtimeByMultiplex } from '../../../app/homeSlice';
 import { RootState } from '../../../app/store';
-import { ICinema } from '../../../formatTypes/Cinema';
-import { IInterest } from '../../../formatTypes/Interest';
+import { IFilm } from '../../../formatTypes/Film';
 
 interface IShowtimesProps {}
 
 const Showtimes: React.FC<IShowtimesProps> = (props) => {
-    const { showtimes } = useSelector((state: RootState) => state.home);
-    const [cinemas, setCinemas] = useState<ICinema[] | undefined>([]);
-    const [interests, setInterests] = useState<IInterest[] | undefined>([]);
+    const { multiplexes, cinemas } = useSelector((state: RootState) => state.home);
+    const [films, setFilms] = useState<IFilm[]>([]);
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getShowtimeByFilm(1282));
+        dispatch(getAllMultiplex());
     }, []);
+
     const handleSelectMultiplex = (maHeThongRap: string) => {
-        const multiplexFind = showtimes?.heThongRapChieu.find(
-            (item) => item.maHeThongRap === maHeThongRap
-        );
-        setInterests([]);
-        setCinemas(multiplexFind?.cumRapChieu);
+        dispatch(getAllShowtimeByMultiplex(maHeThongRap));
     };
     const handleSelectCinema = (maCumRap: string) => {
         const cinemaFind = cinemas?.find((item) => item.maCumRap === maCumRap);
-        setInterests(cinemaFind?.lichChieuPhim);
+        setFilms(cinemaFind?.danhSachPhim!);
+        console.log('cinemaFind?.danhSachPhim!:', cinemaFind?.danhSachPhim!);
     };
     return (
         <Container className="pt-1 showtime">
-            <h2 className="text-light">Lịch chiếu</h2>
+            <h2 className="text-light">Lịch chiếu theo rạp</h2>
             <div className="d-flex py-3">
                 <div className="border p-5 d-flex flex-column gap-3">
-                    {showtimes &&
-                        showtimes.heThongRapChieu.map((item, key) => (
+                    {multiplexes &&
+                        multiplexes.map((item, key) => (
                             <MultiplexItem
                                 {...item}
                                 key={`heThongRapChieu-${key}`}
@@ -43,22 +40,48 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                         ))}
                 </div>
                 <div className="border p-5 d-flex flex-column gap-3 text-light">
-                    {cinemas &&
-                        cinemas.map((item, key) => (
+                    {cinemas.map((item: any, key: number) => {
+                        return (
                             <CinemaItem
                                 {...item}
                                 key={`cinema-item-${key}`}
                                 callbackClick={() => handleSelectCinema(item.maCumRap)}
                             />
-                        ))}
+                        );
+                    })}
                 </div>
                 <div className="border p-5" style={{ flex: 'auto' }}>
-                    <Row>
-                        {interests &&
-                            interests.map((item, key) => {
-                                return <InterestItem {...item} key={`interest-item-${key}`} />;
-                            })}
-                    </Row>
+                    {films.map((item, key) => (
+                        <Row key={`film-showtimes-${key}`}>
+                            <Col sm={12} className="mb-5 px-3">
+                                <Ratio className="ratio ratio-16x9">
+                                    <img src={item.hinhAnh} className="w-100 rounded-3" alt="" />
+                                </Ratio>
+                            </Col>
+                            <Col sm={12} className="text-light ">
+                                <h3 className="text-uppercase text-truncate">
+                                    {item.tenPhim}
+                                </h3>
+                                <Dropdown.Divider />
+                                <h4 className="my-3">Lịch chiếu</h4>
+                                <div className="border rounded-3 p-3">
+                                    <Row>
+                                        {item.lstLichChieuTheoPhim.map((item, key) => (
+                                            <Col lg={4} md={6} className="mb-2">
+                                                <Button
+                                                    variant="warning"
+                                                    className="w-100"
+                                                    key={`interest-${key}`}
+                                                >
+                                                    {moment(item.ngayChieuGioChieu).format('HH:MM')}
+                                                </Button>
+                                            </Col>
+                                        ))}
+                                    </Row>
+                                </div>
+                            </Col>
+                        </Row>
+                    ))}
                 </div>
             </div>
         </Container>
@@ -96,27 +119,11 @@ const CinemaItem: React.FC<ICinemaItemProps> = (props) => {
                 <p className="text-truncate" style={{ maxWidth: '200px' }}>
                     {props.tenCumRap}
                 </p>
+                m,m,
                 <p className="text-truncate" style={{ maxWidth: '200px', fontSize: '14px' }}>
                     {props.diaChi}
                 </p>
-                <Button variant="danger" size="sm" className="mt-2 px-4">
-                    Đặt vé
-                </Button>
             </div>
         </div>
-    );
-};
-
-interface IInterestItemProps {
-    tenRap?: string;
-    ngayChieuGioChieu?: string;
-}
-const InterestItem: React.FC<IInterestItemProps> = (props) => {
-    return (
-        <Col md="6">
-            <div className="w-100 bg-warning p-3 text-center rounded-2 mb-3 fs-4 fw-bold">
-                {props.ngayChieuGioChieu}
-            </div>
-        </Col>
     );
 };

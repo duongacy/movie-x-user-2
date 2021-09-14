@@ -1,3 +1,5 @@
+import { IInterest } from './Interest';
+
 export interface IFilm {
     maPhim: number;
     tenPhim: string;
@@ -11,4 +13,5 @@ export interface IFilm {
     sapChieu: boolean;
     ngayKhoiChieu: string;
     danhGia: number;
+    lstLichChieuTheoPhim: IInterest[];
 }
