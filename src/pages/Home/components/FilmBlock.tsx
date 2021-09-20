@@ -9,11 +9,14 @@ interface Props {}
 
 const FilmBlock = (props: Props) => {
     const dispatch = useDispatch();
-    const { films } = useSelector((state: RootState) => state.home);
+    const { films, showingFilms, comingFilms } = useSelector((state: RootState) => state.home);
 
     useEffect(() => {
         dispatch(getAllFilm());
     }, []);
+    useEffect(() => {
+        console.log('films:', films);
+    }, [films]);
 
     const breakPoints = [
         { width: 320, itemsToShow: 1 },
@@ -24,33 +27,33 @@ const FilmBlock = (props: Props) => {
         <div className="film-block py-5">
             <Container className="py-4" style={{ overflow: 'hidden' }}>
                 <h2 className="text-light">Đang chiếu</h2>
-                <Carousel
-                    className="py-4 d-flex gap-1"
-                    breakPoints={breakPoints}
-                    itemPadding={[0, 8]}
-                    pagination={false}
-                >
-                    <CardItem tenPhim="Ma cà rồng" />
-                    <CardItem tenPhim="Ma cà rồng" />
-                    <CardItem tenPhim="Ma cà rồng" />
-                    <CardItem tenPhim="Ma cà rồng" />
-                    <CardItem tenPhim="Ma cà rồng" />
-                </Carousel>
+                <div style={{ backgroundColor: '#ffffff10' }} className="p-2">
+                    <Carousel
+                        className="py-4 d-flex gap-1"
+                        breakPoints={breakPoints}
+                        itemPadding={[0, 8]}
+                        pagination={false}
+                    >
+                        {showingFilms.map((item, key) => (
+                            <CardItem {...item} key={`dang-chieu-${key}`} />
+                        ))}
+                    </Carousel>
+                </div>
             </Container>
             <Container className="py-4" style={{ overflow: 'hidden' }}>
                 <h2 className="text-light">Sắp chiếu</h2>
-                <Carousel
-                    className="py-4 d-flex gap-1"
-                    breakPoints={breakPoints}
-                    itemPadding={[0, 8]}
-                    pagination={false}
-                >
-                    <CardItem tenPhim="Ma cà rồng" />
-                    <CardItem tenPhim="Ma cà rồng" />
-                    <CardItem tenPhim="Ma cà rồng" />
-                    <CardItem tenPhim="Ma cà rồng" />
-                    <CardItem tenPhim="Ma cà rồng" />
-                </Carousel>
+                <div style={{ backgroundColor: '#ffffff10' }} className="p-2">
+                    <Carousel
+                        className="py-4 d-flex gap-1"
+                        breakPoints={breakPoints}
+                        itemPadding={[0, 8]}
+                        pagination={false}
+                    >
+                        {comingFilms.map((item, key) => (
+                            <CardItem {...item} key={`dang-chieu-${key}`} />
+                        ))}
+                    </Carousel>
+                </div>
             </Container>
         </div>
     );
@@ -59,20 +62,21 @@ const FilmBlock = (props: Props) => {
 export default FilmBlock;
 
 interface ICardItemProps {
-    tenPhim: string;
+    tenPhim?: string;
+    hinhAnh?: string;
 }
-const CardItem: React.FC<ICardItemProps> = ({ tenPhim }) => (
+const CardItem: React.FC<ICardItemProps> = ({ tenPhim, hinhAnh }) => (
     <Ratio className="ratio-16x9">
         <Card
-            className="w-100 rounded-0 border-0"
+            className="w-100 rounded-3 border-0"
             style={{
-                backgroundImage: 'url(images/200.jpeg)',
+                backgroundImage: `url(${hinhAnh})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: 'cover',
             }}
         >
             <Card.Body className="d-flex flex-column justify-content-between">
-                <Card.Title className="text-uppercase text-light fs-3">{tenPhim}</Card.Title>
+                <Card.Title className="text-uppercase text-danger fw-bold fs-4 p-3 rounded-2" style={{backgroundColor:"#ffffff50"}}>{tenPhim}</Card.Title>
                 <Button variant="danger" className="rounded-0">
                     Đặt vé
                 </Button>

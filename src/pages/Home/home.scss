@@ -63,8 +63,8 @@
 /* -------------------------------- showtime -------------------------------- */
 .showtime {
     .multiplex-item {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         overflow: hidden;
         cursor: pointer;
         position: relative;
@@ -80,6 +80,9 @@
                 background-color: #00000010;
             }
         }
+        &__overlay.active {
+            background-color: #ffffff80;
+        }
     }
 
     .cinema-item {
@@ -89,6 +92,14 @@
         &:hover {
             background-color: #ffffff30;
         }
+        
+    }
+    .cinema-item.active {
+        background-color: #ffffff80;
+    }
+    .time-item {
+        flex-basis: 80px;
+        flex-grow: 0;
     }
 }
 /* -------------------------------------------------------------------------- */

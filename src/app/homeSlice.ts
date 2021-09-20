@@ -13,6 +13,8 @@ interface HomeState {
     cinemas: ICinema[];
     multiplexes: IMultiplex[];
     films: IFilm[];
+    showingFilms: IFilm[];
+    comingFilms: IFilm[];
 }
 
 const initialState: HomeState = {
@@ -21,6 +23,8 @@ const initialState: HomeState = {
     cinemas: [],
     multiplexes: [],
     films: [],
+    showingFilms: [],
+    comingFilms: [],
 };
 
 // export const getShowtimeByFilm = createAsyncThunk(
@@ -52,7 +56,6 @@ export const getAllShowtimeByMultiplex = createAsyncThunk(
 export const getAllFilm = createAsyncThunk('home/getAllFilm', async () => {
     getAllFilmService();
     const result = await getAllFilmService();
-    console.log('result.data.content', result.data.content);
     return result.data.content;
 });
 
@@ -68,9 +71,6 @@ const homeSlice = createSlice({
         },
     },
     extraReducers: (builder) => {
-        // builder.addCase(getShowtimeByFilm.fulfilled, (state, action) => {
-        //     state.showtimes = action.payload;
-        // });
         builder.addCase(getAllMultiplex.fulfilled, (state, action) => {
             state.multiplexes = action.payload;
         });
@@ -78,6 +78,14 @@ const homeSlice = createSlice({
         builder.addCase(getAllShowtimeByMultiplex.fulfilled, (state, action) => {
             state.cinemas = action.payload[0].lstCumRap;
             console.log('showtimes ne:', action);
+        });
+
+        builder.addCase(getAllFilm.fulfilled, (state, action) => {
+            state.films = action.payload;
+            state.showingFilms = action.payload.filter((item: IFilm) => item.dangChieu === true);
+            console.log('showing:', state.showingFilms);
+
+            state.comingFilms = action.payload.filter((item: IFilm) => item.sapChieu === true);
         });
     },
 });
