@@ -2,6 +2,9 @@
 // $success: #000000;
 
 @import 'bootstrap/scss/bootstrap.scss';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 .ratio-md-16x9 {
     @include media-breakpoint-up(md) {
