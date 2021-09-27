@@ -4,6 +4,7 @@ import Carousel from 'react-elastic-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFilm } from '../../../app/homeSlice';
 import { RootState } from '../../../app/store';
+import { Link } from 'react-router-dom';
 
 interface Props {}
 
@@ -64,8 +65,9 @@ export default FilmBlock;
 interface ICardItemProps {
     tenPhim?: string;
     hinhAnh?: string;
+    maPhim: number;
 }
-const CardItem: React.FC<ICardItemProps> = ({ tenPhim, hinhAnh }) => (
+const CardItem: React.FC<ICardItemProps> = ({ tenPhim, hinhAnh, maPhim }) => (
     <Ratio className="ratio-16x9">
         <Card
             className="w-100 rounded-3 border-0"
@@ -76,10 +78,21 @@ const CardItem: React.FC<ICardItemProps> = ({ tenPhim, hinhAnh }) => (
             }}
         >
             <Card.Body className="d-flex flex-column justify-content-between">
-                <Card.Title className="text-uppercase text-danger fw-bold fs-4 p-3 rounded-2" style={{backgroundColor:"#ffffff50"}}>{tenPhim}</Card.Title>
-                <Button variant="danger" className="rounded-0">
-                    Đặt vé
-                </Button>
+                <Card.Title
+                    className="text-uppercase text-danger fw-bold fs-4 p-3 rounded-2"
+                    style={{ backgroundColor: '#ffffff50' }}
+                >
+                    {tenPhim}
+                </Card.Title>
+
+                <div className="d-flex justify-content-end gap-1">
+                    <Button variant="secondary" className="rounded-0">
+                        <Link to={`/detail/${maPhim}`}>Chi tiết phim</Link>
+                    </Button>
+                    <Button variant="danger" className="rounded-0">
+                        Đặt vé
+                    </Button>
+                </div>
             </Card.Body>
         </Card>
     </Ratio>

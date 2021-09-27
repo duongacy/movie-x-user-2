@@ -27,14 +27,6 @@ const initialState: HomeState = {
     comingFilms: [],
 };
 
-// export const getShowtimeByFilm = createAsyncThunk(
-//     'home/getShowtimeByFilm',
-//     async (maPhim: number) => {
-//         const result = await getShowtimeByFilmService(maPhim);
-//         return result.data.content;
-//     }
-// );
-
 export const getAllMultiplex = createAsyncThunk('home/getAllMultiplex', async () => {
     const result = await getAllMultiplexService();
     return result.data.content;

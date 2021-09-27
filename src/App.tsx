@@ -35,7 +35,7 @@ function App() {
                     </FeatureTemplate>
                 </Route>
 
-                <Route exact path="/detail/:id">
+                <Route exact path="/detail/:maPhim">
                     <FeatureTemplate>
                         <Detail />
                     </FeatureTemplate>
