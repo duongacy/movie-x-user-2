@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Col, Container, Form, Row, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getFilmDetail, getShowtimeByFilm } from '../../app/detailSlice';
@@ -74,30 +74,83 @@ const Detail = (props: Props) => {
     };
     return (
         <div>
-            <div>
-                <img src={filmDetail?.hinhAnh} alt="" />
-                <p>tenPhim {filmDetail?.tenPhim}</p>
-                <p>danhGia {filmDetail?.danhGia}</p>
-                <p>moTa {filmDetail?.moTa}</p>
-                <p>ngayKhoiChieu {filmDetail?.ngayKhoiChieu}</p>
-                <p>sapChieu {filmDetail?.sapChieu}</p>
-            </div>
+            <Container className="py-5">
+                <Row>
+                    <Col md={4}>
+                        <img src={filmDetail?.hinhAnh} className="w-100 h-100" alt="" />
+                    </Col>
+                    <Col md={8}>
+                        <h3>{filmDetail?.tenPhim}</h3>
+                        <Table striped bordered hover variant="dark">
+                            <tbody>
+                                <tr>
+                                    <th style={{ minWidth: '200px' }}>Mô tả</th>
+                                    <td>{filmDetail?.moTa}</td>
+                                </tr>
+                                <tr>
+                                    <th>Ngày khởi chiếu</th>
+                                    <td>
+                                        {moment(filmDetail?.ngayKhoiChieu).format('DD/MM/YYYY')}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>Đánh giá</th>
+                                    <td>{filmDetail?.danhGia}</td>
+                                </tr>
+                                <tr>
+                                    <td colSpan={2}>
+                                        <div className="d-flex gap-3">
+                                            <Form.Check
+                                                readOnly
+                                                type="checkbox"
+                                                checked={filmDetail?.dangChieu}
+                                                label="Đang chiếu"
+                                            />
+                                            <Form.Check
+                                                readOnly
+                                                type="checkbox"
+                                                checked={filmDetail?.sapChieu}
+                                                label="Sắp chiếu"
+                                            />
+                                            <Form.Check
+                                                readOnly
+                                                type="checkbox"
+                                                checked={filmDetail?.hot}
+                                                label="Hot"
+                                            />
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                        <div className="border">
+                            <Row>
+                                <Col lg={4}>
+                                    <Box className='m-2'>
+                                        <FormControl fullWidth size="small">
+                                            <InputLabel id="select-1">He thong rap</InputLabel>
+                                            <Select
+                                                labelId="select-1"
+                                                value={cineplexSelected}
+                                                label="He thong rap"
+                                                onChange={handleChangeCineplex}
+                                            >
+                                                {filmShowtimes?.heThongRapChieu.map((item, key) => (
+                                                    <MenuItem value={item.maHeThongRap}>
+                                                        {item.tenHeThongRap}
+                                                    </MenuItem>
+                                                ))}
+                                            </Select>
+                                        </FormControl>
+                                    </Box>
+                                </Col>
+                            </Row>
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
 
             <div className="d-flex">
-                <FormControl>
-                    <InputLabel id="select-1">He thong rap</InputLabel>
-                    <Select
-                        labelId="select-1"
-                        value={cineplexSelected}
-                        label="He thong rap"
-                        onChange={handleChangeCineplex}
-                    >
-                        {filmShowtimes?.heThongRapChieu.map((item, key) => (
-                            <MenuItem value={item.maHeThongRap}>{item.tenHeThongRap}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-
                 <FormControl>
                     <InputLabel id="select-2">Cum rap</InputLabel>
                     <Select
