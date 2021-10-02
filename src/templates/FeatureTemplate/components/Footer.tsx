@@ -53,8 +53,7 @@ const Footer = (props: Props) => {
 
 export default Footer;
 
-interface IFooterListItemProps {}
-const FooterListItem: React.FC<IFooterListItemProps> = ({ children }) => {
+const FooterListItem: React.FC = ({ children }) => {
     return (
         <li style={{ paddingBottom: '0.5rem' }}>
             <a href="" style={{ color: 'white', textDecoration: 'none' }}>
