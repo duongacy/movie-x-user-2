@@ -1,19 +1,14 @@
 // @import 'bootstrap/dist/css/bootstrap.min.css';
 // $success: #000000;
 
-@import 'bootstrap/scss/bootstrap.scss';
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+// .ratio-md-16x9 {
+//     @include media-breakpoint-up(md) {
+//         --bs-aspect-ratio: 56%;
+//     }
+// }
 
-.ratio-md-16x9 {
-    @include media-breakpoint-up(md) {
-        --bs-aspect-ratio: 56%;
-    }
-}
-
-.ratio-lg-21x9 {
-    @include media-breakpoint-up(lg) {
-        --bs-aspect-ratio: 43%;
-    }
-}
+// .ratio-lg-21x9 {
+//     @include media-breakpoint-up(lg) {
+//         --bs-aspect-ratio: 43%;
+//     }
+// }

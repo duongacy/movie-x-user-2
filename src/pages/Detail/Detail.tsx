@@ -126,7 +126,7 @@ const Detail = (props: Props) => {
                         <div className="border">
                             <Row>
                                 <Col lg={4}>
-                                    <Box className='m-2'>
+                                    <Box className="m-2">
                                         <FormControl fullWidth size="small">
                                             <InputLabel id="select-1">He thong rap</InputLabel>
                                             <Select
@@ -140,6 +140,23 @@ const Detail = (props: Props) => {
                                                         {item.tenHeThongRap}
                                                     </MenuItem>
                                                 ))}
+                                            </Select>
+                                        </FormControl>
+
+                                        <FormControl required sx={{ m: 1, minWidth: 120 }}>
+                                            <InputLabel id="demo-1">Age</InputLabel>
+                                            <Select
+                                                labelId="demo-1"
+                                                value={10}
+                                                label="Age *"
+                                                onChange={() => {}}
+                                            >
+                                                <MenuItem value="">
+                                                    <em>None</em>
+                                                </MenuItem>
+                                                <MenuItem value={10}>Ten</MenuItem>
+                                                <MenuItem value={20}>Twenty</MenuItem>
+                                                <MenuItem value={30}>Thirty</MenuItem>
                                             </Select>
                                         </FormControl>
                                     </Box>
@@ -177,6 +194,7 @@ const Detail = (props: Props) => {
                         onChange={handleChangeDay}
                     />
                 </FormControl>
+
                 <div className="border">
                     <h2>Gio chieu</h2>
                     {dsGioChieu.map((item: string, key: number) => (
