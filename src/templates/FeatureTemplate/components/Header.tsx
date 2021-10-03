@@ -47,7 +47,6 @@ export default function Header() {
     };
     const renderMenu = (
         <Menu
-            color="primary"
             anchorEl={anchorEl}
             open={open}
             onClose={handleClose}
@@ -57,7 +56,6 @@ export default function Header() {
                 sx: {
                     'width': '200px',
                     'overflow': 'visible',
-                    'filter': 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                     'mt': 1.5,
                     '& .MuiAvatar-root': {
                         width: 32,
@@ -149,7 +147,7 @@ export default function Header() {
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
-                <Toolbar sx={{ paddingY:"1rem" }}>
+                <Toolbar sx={{ paddingY: '1rem' }}>
                     <React.Fragment>
                         <IconButton
                             onClick={toggleDrawer(true)}
@@ -175,7 +173,7 @@ export default function Header() {
                         variant="h3"
                         noWrap
                         component="div"
-                        color="secondary"
+                        color="error"
                         sx={{
                             display: { xs: 'none', md: 'block' },
                             fontWeight: '700',
@@ -224,12 +222,12 @@ export default function Header() {
                         >
                             <FormControlLabel
                                 value="en"
-                                control={<Radio color="secondary" size="small" />}
+                                control={<Radio size="small" color="error" />}
                                 label="EN"
                             />
                             <FormControlLabel
                                 value="vi"
-                                control={<Radio color="secondary" size="small" />}
+                                control={<Radio size="small" color="error" />}
                                 label="VI"
                             />
                         </RadioGroup>
