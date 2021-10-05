@@ -1,11 +1,22 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { Col, Container, Row, Button, Ratio, Dropdown, Card, Badge } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllMultiplex, getAllShowtimeByMultiplex } from '../../../app/homeSlice';
 import { RootState } from '../../../app/store';
 import { ICinema } from '../../../formatTypes/Cinema';
 import { IFilm } from '../../../formatTypes/Film';
+import Box from '@mui/material/Box';
+import { Container } from '@mui/material';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { CardMedia, Grid, CardContent, Typography, CardActions, Card, Button } from '@mui/material';
+import MobileDatePicker from '@mui/lab/MobileDatePicker';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
 
 interface IShowtimesProps {}
 
@@ -20,100 +31,151 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
         dispatch(getAllMultiplex());
     }, []);
 
-    const handleSelectMultiplex = (maHeThongRap: string) => {
-        setMultiplexSelectedId(maHeThongRap);
-        dispatch(getAllShowtimeByMultiplex(maHeThongRap));
+    const handleSelectMultiplex = (event: SelectChangeEvent) => {
+        const { value } = event.target;
+        setMultiplexSelectedId(value);
+        dispatch(getAllShowtimeByMultiplex(value));
     };
-    const handleSelectCinema = (maCumRap: string) => {
-        setCinemaSelectedId(maCumRap);
-        const cinemaFind = cinemas?.find((item) => item.maCumRap === maCumRap);
+    const handleSelectCinema = (event: SelectChangeEvent) => {
+        const { value } = event.target;
+        setCinemaSelectedId(value);
+        const cinemaFind = cinemas?.find((item) => item.maCumRap === value);
         setFilms(cinemaFind?.danhSachPhim!);
     };
+
+    const [valueDate, setValueDate] = React.useState<Date | null>(new Date());
+
+    const handleChangeDate = (newValue: Date | null) => {
+        setValueDate(newValue);
+    };
     return (
-        <Container className="pt-1 showtime">
-            <h2 className="text-light">Lịch chiếu theo rạp</h2>
-            <Row className="py-3 m-0">
-                <Col
-                    lg={2}
-                    className="border p-5 d-flex flex-column align-items-center gap-3"
-                    style={{ marginRight: '-1px', maxHeight: '800px', overflowY: 'auto' }}
-                >
-                    {multiplexes.map((item, key) => (
-                        <MultiplexItem
-                            {...item}
-                            active={item.maHeThongRap === multiplexSelectedId}
-                            key={`heThongRapChieu-${key}`}
-                            callbackClick={() => handleSelectMultiplex(item.maHeThongRap)}
-                        />
-                    ))}
-                </Col>
-                <Col
-                    lg={5}
-                    className="p-5 border d-flex flex-column gap-3 text-light"
-                    style={{ marginRight: '-1px', maxHeight: '800px', overflowY: 'auto' }}
-                >
-                    {cinemas.map((item: ICinema, key: number) => {
-                        return (
-                            <CinemaItem
-                                {...item}
-                                active={ item.maCumRap === cinemaSelectedId }
-                                key={`cinema-item-${key}`}
-                                callbackClick={() => handleSelectCinema(item.maCumRap)}
-                            />
-                        );
-                    })}
-                </Col>
-                <Col
-                    lg={5}
-                    className="p-5 border"
-                    style={{
-                        flex: 'auto',
-                        marginRight: '-1px',
-                        maxHeight: '800px',
-                        overflowY: 'auto',
-                    }}
-                >
-                    {films.map((item, key) => (
-                        <>
-                            <Card
-                                className="rounded-3 border-0 mb-3 text-light"
-                                style={{ backgroundColor: '#ffffff10' }}
+        <Container>
+            <Typography
+                variant="h4"
+                sx={{
+                    marginBottom: '1rem',
+                    color: 'white',
+                }}
+            >
+                Lịch chiếu
+            </Typography>
+            <Box
+                sx={{ flexGrow: 1 }}
+                style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '.5rem' }}
+            >
+                <Grid container spacing={2}>
+                    <Grid item xs={4}>
+                        <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
+                            <InputLabel id="demo-simple-select-label">Hệ thống rạp</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={multiplexSelectedId}
+                                label="Hệ thống rạp"
+                                onChange={handleSelectMultiplex}
                             >
-                                <Card.Body>
-                                    <Ratio className="ratio-16x9">
-                                        <img src={item.hinhAnh} className="rounded-3" alt="" />
-                                    </Ratio>
-                                    <Card.Title className="mt-3 fw-bold">
-                                        <span className="fs-3 text-uppercase">{item.tenPhim}</span>
-                                        {item.hot && (
-                                            <span className="fs-6 bg-danger px-2 py-1 ms-2 rounded-1">
-                                                Hot
-                                            </span>
-                                        )}
-                                    </Card.Title>
-                                    <Card.Title className="mt-3 fs-5">Lịch chiếu</Card.Title>
-                                    <div
-                                        className="d-flex gap-2 py-2"
-                                        style={{ maxWidth: '100%', overflowX: 'auto' }}
-                                    >
-                                        {item.lstLichChieuTheoPhim.map((item, key) => (
-                                            <a
-                                                href="#"
-                                                key={`showtime-${key}`}
-                                                className="fw-bold time-item w-100 text-decoration-none text-warning bg-secondary text-center rounded-2"
-                                            >
-                                                <div className="py-2 px-3">
-                                                    {moment(item.ngayChieuGioChieu).format('HH:MM')}
-                                                </div>
-                                            </a>
-                                        ))}
-                                    </div>
-                                </Card.Body>
-                            </Card>
-                        </>
-                    ))}
-                </Col>
-            </Row>
+                                {multiplexes.map((item, key) => (
+                                    <MenuItem value={item.maHeThongRap} key={`hethongrap-${key}`}>
+                                        {item.tenHeThongRap}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
+                            <InputLabel id="demo-simple-select-label-2">Cụm rạp</InputLabel>
+                            <Select
+                                labelId="demo-simple-select-label-2"
+                                value={cinemaSelectedId}
+                                label="Cụm rạp"
+                                onChange={handleSelectCinema}
+                            >
+                                {cinemas.map((item, key) => (
+                                    <MenuItem value={item.maCumRap} key={`cumrap-${key}`}>
+                                        {item.tenCumRap}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+
+                        {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <Stack spacing={3}>
+                                <MobileDatePicker
+                                    label="Date mobile"
+                                    inputFormat="MM/dd/yyyy"
+                                    value={valueDate}
+                                    onChange={handleChangeDate}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </Stack>
+                        </LocalizationProvider> */}
+                    </Grid>
+                    <Grid
+                        item
+                        xs={8}
+                        sx={{
+                            maxHeight: '700px',
+                            overflowY: 'scroll',
+                        }}
+                    >
+                        {films.map((item, key) => (
+                            <>
+                                <Card
+                                    sx={{
+                                        marginBottom: '1rem',
+                                    }}
+                                    key={`film-${key}`}
+                                >
+                                    <CardMedia
+                                        component="img"
+                                        alt="green iguana"
+                                        image={item.hinhAnh}
+                                        sx={{
+                                            objectFit: 'cover',
+                                            height: '300px',
+                                        }}
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h5" component="div">
+                                            {item.tenPhim}
+                                        </Typography>
+                                        <Typography variant="body2" color="text.secondary">
+                                            {item.moTa}
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                display: 'grid',
+                                                gridTemplateColumns: 'auto auto auto auto',
+                                                gap: '0.5rem',
+                                            }}
+                                        >
+                                            {item.lstLichChieuTheoPhim.map((item, key) => {
+                                                if (key < 8)
+                                                    return (
+                                                        <Button
+                                                            style={{
+                                                                maxWidth: '200px',
+                                                            }}
+                                                            variant="contained"
+                                                            key={`lichchieu-${key}`}
+                                                        >
+                                                            {moment(item.ngayChieuGioChieu).format(
+                                                                'HH:MM'
+                                                            )}
+                                                        </Button>
+                                                    );
+                                            })}
+                                        </Box>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button size="small">Chi tiết phim</Button>
+                                        <Button size="small">Đặt vé</Button>
+                                    </CardActions>
+                                </Card>
+                            </>
+                        ))}
+                    </Grid>
+                </Grid>
+            </Box>
         </Container>
     );
 };

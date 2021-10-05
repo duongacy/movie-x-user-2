@@ -173,7 +173,7 @@ const FilmBlockContainer: FC = ({ children }) => {
     return (
         <Container
             sx={{
-                paddingY: '2rem',
+                marginBottom: '3rem',
             }}
         >
             {children}

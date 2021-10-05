@@ -23,7 +23,7 @@ const Footer = (props: Props) => {
                             <Typography sx={{ paddingY: '.3rem' }}>
                                 Hotline: 1900 545 436
                             </Typography>
-                            <img src="images/bct.png" height="55" alt="" />
+                            <img src="/images/bct.png" height="55" alt="" />
                         </FooterBox>
                     </Grid>
                     <Grid item md={3}>

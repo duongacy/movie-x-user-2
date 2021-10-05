@@ -1,13 +1,13 @@
 import axios from 'axios';
+import { BASE_URL, MA_NHOM, TOKEN_CYBERSOFT } from '../config';
 
 export const getShowtimeByFilmService = (maPhim: number) => {
-    const URL = `http://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=1282`;
+    const URL = `${BASE_URL}api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=${maPhim}`;
     return axios({
         method: 'get',
-        url: 'http://movienew.cybersoft.edu.vn/api/QuanLyRap/LayThongTinLichChieuPhim?MaPhim=1282',
+        url: URL,
         headers: {
-            TokenCybersoft:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJGcm9udCBFbmQgNjYiLCJIZXRIYW5TdHJpbmciOiIzMC8wMS8yMDIyIiwiSGV0SGFuVGltZSI6IjE2NDM1MDA4MDAwMDAiLCJuYmYiOjE2MTc1NTU2MDAsImV4cCI6MTY0MzY0ODQwMH0.ufODEd--n4Nm91XfL2RnIB9E1_kvZ4Dy1dyDst3wKuE',
+            TokenCybersoft: TOKEN_CYBERSOFT,
         },
     });
 };
@@ -15,10 +15,9 @@ export const getShowtimeByFilmService = (maPhim: number) => {
 export const getAllFilmService = () => {
     const promise = axios({
         method: 'get',
-        url: 'http://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayDanhSachPhim?maNhom=GP00',
+        url: `${BASE_URL}api/QuanLyPhim/LayDanhSachPhim?maNhom=${MA_NHOM}`,
         headers: {
-            TokenCybersoft:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJGcm9udCBFbmQgNjYiLCJIZXRIYW5TdHJpbmciOiIzMC8wMS8yMDIyIiwiSGV0SGFuVGltZSI6IjE2NDM1MDA4MDAwMDAiLCJuYmYiOjE2MTc1NTU2MDAsImV4cCI6MTY0MzY0ODQwMH0.ufODEd--n4Nm91XfL2RnIB9E1_kvZ4Dy1dyDst3wKuE',
+            TokenCybersoft: TOKEN_CYBERSOFT,
         },
     });
     return promise;
@@ -27,10 +26,9 @@ export const getAllFilmService = () => {
 export const getFilmDetailService = (maPhim: number) => {
     const promise = axios({
         method: 'get',
-        url: `http://movienew.cybersoft.edu.vn/api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`,
+        url: `${BASE_URL}api/QuanLyPhim/LayThongTinPhim?MaPhim=${maPhim}`,
         headers: {
-            TokenCybersoft:
-                'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJGcm9udCBFbmQgNjYiLCJIZXRIYW5TdHJpbmciOiIzMC8wMS8yMDIyIiwiSGV0SGFuVGltZSI6IjE2NDM1MDA4MDAwMDAiLCJuYmYiOjE2MTc1NTU2MDAsImV4cCI6MTY0MzY0ODQwMH0.ufODEd--n4Nm91XfL2RnIB9E1_kvZ4Dy1dyDst3wKuE',
+            TokenCybersoft: TOKEN_CYBERSOFT,
         },
     });
     return promise;

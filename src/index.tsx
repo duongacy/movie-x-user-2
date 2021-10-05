@@ -45,7 +45,7 @@ const theme = createTheme({
             main: '#66bb6a',
             dark: '#388e3c',
             contrastText: '#fff',
-        },
+        }
     },
 });
 ReactDOM.render(
