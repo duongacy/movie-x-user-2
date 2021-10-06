@@ -40,7 +40,7 @@ function App() {
                     </FeatureTemplate>
                 </Route>
 
-                <Route exact path="/ticket-booking/:id">
+                <Route exact path="/ticket-booking/:maLichChieu">
                     <FeatureTemplate>
                         <TicketBooking />
                     </FeatureTemplate>
