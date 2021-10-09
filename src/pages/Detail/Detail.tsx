@@ -68,21 +68,6 @@ const Detail = (props: Props) => {
         setLichChieuPhim(resultSelected?.lichChieuPhim);
     };
 
-    // const handleChangeDay = (event: ChangeEvent<HTMLInputElement>) => {
-    //     let rs: any[] = [];
-
-    //     const { value } = event.target;
-    //     setSelectedDay(value);
-    //     const ngayChon = moment(value).format('DD/MM/YYYY').toString();
-    //     lichChieuPhim?.forEach((item) => {
-    //         let ngayChieu = moment(item.ngayChieuGioChieu).format('DD/MM/YYYY').toString();
-    //         if (ngayChon === ngayChieu) {
-    //             rs = [...rs, moment(item.ngayChieuGioChieu).format('hh:mm').toString()];
-    //             setDsGioChieu(rs);
-    //         }
-    //     });
-    // };
-
     const [expanded, setExpanded] = React.useState<any>({
         moTa: true,
         lichChieu: true,
@@ -216,6 +201,7 @@ const Detail = (props: Props) => {
                                             <Link
                                                 to={`/ticket-booking/${item.maLichChieu}`}
                                                 style={{ textDecoration: 'none' }}
+                                                key={`ticket-booking-${key}`}
                                             >
                                                 <Button variant="contained">
                                                     {moment(item.ngayChieuGioChieu).format('HH:MM')}
