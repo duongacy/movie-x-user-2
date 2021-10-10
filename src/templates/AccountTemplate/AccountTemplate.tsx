@@ -4,7 +4,14 @@ interface Props {}
 
 const AccountTemplate: React.FC<Props> = ({ children }) => {
     return (
-        <div>
+        <div
+            style={{
+                backgroundImage: "url('/images/film-reel-reels-3d-wallpaper-preview.jpg')",
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+            }}
+        >
             <div>Account template</div>
             {children}
         </div>

@@ -20,7 +20,7 @@ function App() {
                 </Route>
                 <Route exact path="/login">
                     <AccountTemplate>
-                        <Login />
+                    <Login />
                     </AccountTemplate>
                 </Route>
                 <Route exact path="/my-account">
