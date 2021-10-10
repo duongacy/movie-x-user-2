@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { ITicketBooking } from '../formatTypes/Ticket';
 import { ITicketRoom } from '../formatTypes/TicketRoom';
-import { getTicketRoomService } from '../services/ticket.services';
+import { bookTicketService, getTicketRoomService } from '../services/ticket.services';
 
 interface TicketBookingState {
     ticketRoom: ITicketRoom | null;
@@ -13,6 +14,11 @@ export const getTicketRoom = createAsyncThunk('getTicketRoom', async (maLichChie
     return result.data.content;
 });
 
+export const bookTicket = createAsyncThunk('bookTicket', async (ticketBooking: ITicketBooking) => {
+    const result = await bookTicketService(ticketBooking);
+    return result.data.content;
+});
+
 const ticketBookingSlice = createSlice({
     name: 'ticketBooking',
     initialState,
@@ -20,6 +26,9 @@ const ticketBookingSlice = createSlice({
     extraReducers: (builder) => {
         builder.addCase(getTicketRoom.fulfilled, (state, action) => {
             state.ticketRoom = action.payload;
+        });
+        builder.addCase(bookTicket.fulfilled, (state, action) => {
+            console.log('book ticket thanh cong');
         });
     },
 });
