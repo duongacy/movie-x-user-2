@@ -1,5 +1,5 @@
 import { Container, Typography, Button } from '@material-ui/core';
-import * as React from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,10 +9,22 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
 import { Checkbox, FormControlLabel } from '@mui/material';
+import { RootState } from '../../app/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserLocal } from '../../app/accountSlice';
 
 interface Props {}
 
 const Login = (props: Props) => {
+    const { isLogged, userLocal } = useSelector((state: RootState) => state.account);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getUserLocal());
+    }, []);
+    useEffect(() => {
+        console.log('isLogged:', isLogged);
+    }, [isLogged]);
+
     const [values, setValues] = React.useState({
         showPassword: false,
     });
