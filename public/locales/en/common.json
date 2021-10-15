@@ -1,3 +1,15 @@
 {
-    "showtimes": "Showtimes"
+    "showtimes": "Showtimes",
+    "cinema": "Cinema",
+    "news": "News",
+    "application": "Application",
+    "now-showing" : "Now showing",
+    "coming-soon" : "Coming soon",
+    "address": "Address : Z06 Street No. 13, Tan Thuan Dong Ward, District 7, City. Ho Chi Minh, Vietnam.",
+    "certificate-number" : "Business registration certificate number: 0101659783",
+    "hotline": "Hotline: 1900 545 436",
+    "resource" : "Resource",
+    "theater-system" : "Theater system",
+    "sign-out" : "Sign out",
+    "account-template" : " Account template"
 }

@@ -6,6 +6,7 @@ import { RootState } from '../../../app/store';
 import { Link } from 'react-router-dom';
 import { Container, Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import Rating from '@mui/material/Rating';
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
@@ -15,6 +16,7 @@ const breakPoints = [
     { width: 992, itemsToShow: 4, itemsToScroll: 4 },
 ];
 const FilmBlock = (props: Props) => {
+    const { i18n, t } = useTranslation(['home']);
     const dispatch = useDispatch();
     const { films, showingFilms, comingFilms } = useSelector((state: RootState) => state.home);
 
@@ -32,7 +34,7 @@ const FilmBlock = (props: Props) => {
                     variant="h4"
                     sx={{ marginBottom: '1rem', color: 'secondary.contrastText' }}
                 >
-                    Đang chiếu
+                   {t('home:showtimes')}
                 </Typography>
                 <Box
                     sx={{
@@ -41,7 +43,7 @@ const FilmBlock = (props: Props) => {
                         borderRadius: '.5rem',
                     }}
                 >
-                    <Carousel breakPoints={breakPoints} itemPadding={[0, 8]} pagination={false}>
+                    <Carousel isRTL={false} breakPoints={breakPoints} itemPadding={[0, 8]} pagination={false}>
                         {showingFilms.map((item, key) => (
                             <FilmBlockItem.Wrapper key={`dang-chieu-${key}`}>
                                 <Link to={`/detail/${item.maPhim}`}>
@@ -87,7 +89,7 @@ const FilmBlock = (props: Props) => {
                                             value={item.danhGia / 2}
                                             readOnly
                                         />
-                                        <Button variant="contained">Đặt vé</Button>
+                                        <Button variant="contained">{t('home:booking')}</Button>
                                     </Box>
                                 </CardContent>
                             </FilmBlockItem.Wrapper>
@@ -100,7 +102,7 @@ const FilmBlock = (props: Props) => {
                     variant="h4"
                     sx={{ marginBottom: '1rem', color: 'secondary.contrastText' }}
                 >
-                    Sắp chiếu
+                    {t('home:coming-soon')}
                 </Typography>
                 <Box
                     sx={{
@@ -109,7 +111,7 @@ const FilmBlock = (props: Props) => {
                         borderRadius: '.5rem',
                     }}
                 >
-                    <Carousel breakPoints={breakPoints} itemPadding={[0, 8]} pagination={false}>
+                    <Carousel isRTL={false} breakPoints={breakPoints} itemPadding={[0, 8]} pagination={false}>
                         {comingFilms.map((item, key) => (
                             <FilmBlockItem.Wrapper key={`sap-chieu-${key}`}>
                                 <Link to={`/detail/${item.maPhim}`}>
@@ -155,7 +157,7 @@ const FilmBlock = (props: Props) => {
                                             value={item.danhGia / 2}
                                             readOnly
                                         />
-                                        <Button variant="contained">Đặt vé</Button>
+                                        <Button variant="contained">{t('home:booking')}</Button>
                                     </Box>
                                 </CardContent>
                             </FilmBlockItem.Wrapper>

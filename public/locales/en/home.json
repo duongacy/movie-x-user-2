@@ -1,3 +1,11 @@
 {
-    "hello": "Hello"
+    "hello": "Hello",
+    "now-showing" : "Now showing",
+    "booking" : "Booking",
+    "coming-soon" : "Coming soon",
+    "showtimes": "Showtimes",
+    "cinema": "Cinema",
+    "theater-system" : "Theater system",
+    "details" : "View details",
+    "check": "Check it out!"
 }

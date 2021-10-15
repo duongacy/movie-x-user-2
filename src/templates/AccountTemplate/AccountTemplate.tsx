@@ -1,8 +1,10 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
 const AccountTemplate: React.FC<Props> = ({ children }) => {
+    const { i18n, t } = useTranslation(['common']);
     return (
         <div
             style={{
@@ -12,7 +14,7 @@ const AccountTemplate: React.FC<Props> = ({ children }) => {
                 backgroundSize: 'cover',
             }}
         >
-            <div>Account template</div>
+            <div>{t('common:account-template')}</div>
             {children}
         </div>
     );
