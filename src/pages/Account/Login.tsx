@@ -1,5 +1,5 @@
 import { Container, Typography, Button } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import React, { FormEventHandler, useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
@@ -11,22 +11,27 @@ import Visibility from '@mui/icons-material/Visibility';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import { RootState } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserLocal } from '../../app/accountSlice';
+import { getUserLocal, login } from '../../app/accountSlice';
+import { IUserLogin } from '../../formatTypes/Account';
 
 interface Props {}
 
 const Login = (props: Props) => {
-    const { isLogged, userLocal } = useSelector((state: RootState) => state.account);
+    const { userLocal } = useSelector((state: RootState) => state.account);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getUserLocal());
     }, []);
     useEffect(() => {
-        console.log('isLogged:', isLogged);
-    }, [isLogged]);
+        console.log('userLocal:', userLocal);
+    }, [userLocal]);
 
     const [values, setValues] = React.useState({
         showPassword: false,
+    });
+    const [userInput, setUserInput] = useState<IUserLogin>({
+        taiKhoan: '',
+        matKhau: '',
     });
 
     const handleClickShowPassword = () => {
@@ -38,7 +43,27 @@ const Login = (props: Props) => {
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {};
+    const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setUserInput({
+            ...userInput,
+            matKhau: value,
+        });
+    };
+    const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { value } = event.target;
+        setUserInput({
+            ...userInput,
+            taiKhoan: value,
+        });
+    };
+
+    const handleSubmit = () => {
+        console.log('hihi');
+
+        dispatch(login(userInput));
+    };
+
     return (
         <Container>
             <Box
@@ -72,7 +97,7 @@ const Login = (props: Props) => {
                     </Typography>
                     <FormControl variant="standard">
                         <InputLabel htmlFor="standard-adornment-username">Username</InputLabel>
-                        <Input id="standard-adornment-username" />
+                        <Input id="standard-adornment-username" onChange={handleChangeUsername} />
                     </FormControl>
 
                     <FormControl variant="standard">
@@ -109,6 +134,7 @@ const Login = (props: Props) => {
                             variant="contained"
                             size="large"
                             style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
+                            onClick={handleSubmit}
                         >
                             Đăng nhập
                         </Button>

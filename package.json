@@ -2,7 +2,7 @@
     "name": "movie-x-user-2",
     "version": "0.1.0",
     "private": true,
-    "proxy": "https://movienew.cybersoft.edu.vn/",
+    "proxy": "https://movienew.cybersoft.edu.vn",
     "dependencies": {
         "@craco/craco": "^6.3.0",
         "@date-io/date-fns": "^1.3.13",

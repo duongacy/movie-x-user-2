@@ -41,7 +41,12 @@ const FilmBlock = (props: Props) => {
                         borderRadius: '.5rem',
                     }}
                 >
-                    <Carousel breakPoints={breakPoints} itemPadding={[0, 8]} pagination={false}>
+                    <Carousel
+                        isRTL={false}
+                        breakPoints={breakPoints}
+                        itemPadding={[0, 8]}
+                        pagination={false}
+                    >
                         {showingFilms.map((item, key) => (
                             <FilmBlockItem.Wrapper key={`dang-chieu-${key}`}>
                                 <Link to={`/detail/${item.maPhim}`}>
@@ -109,7 +114,12 @@ const FilmBlock = (props: Props) => {
                         borderRadius: '.5rem',
                     }}
                 >
-                    <Carousel breakPoints={breakPoints} itemPadding={[0, 8]} pagination={false}>
+                    <Carousel
+                        isRTL={false}
+                        breakPoints={breakPoints}
+                        itemPadding={[0, 8]}
+                        pagination={false}
+                    >
                         {comingFilms.map((item, key) => (
                             <FilmBlockItem.Wrapper key={`sap-chieu-${key}`}>
                                 <Link to={`/detail/${item.maPhim}`}>
