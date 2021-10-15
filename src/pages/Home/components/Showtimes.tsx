@@ -13,10 +13,12 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { CardMedia, Grid, CardContent, Typography, CardActions, Card, Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 interface IShowtimesProps {}
 
 const Showtimes: React.FC<IShowtimesProps> = (props) => {
+    const { i18n, t } = useTranslation(['home']);
     const { multiplexes, cinemas } = useSelector((state: RootState) => state.home);
     const [films, setFilms] = useState<IFilm[]>([]);
     const [multiplexSelectedId, setMultiplexSelectedId] = useState('');
@@ -53,7 +55,7 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                     color: 'white',
                 }}
             >
-                Lịch chiếu
+                {t('home:showtimes')}
             </Typography>
             <Box
                 sx={{ flexGrow: 1 }}
@@ -62,7 +64,7 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
-                            <InputLabel id="demo-simple-select-label">Hệ thống rạp</InputLabel>
+                            <InputLabel id="demo-simple-select-label">{t('home:theater-system')}</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
@@ -78,7 +80,7 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                             </Select>
                         </FormControl>
                         <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
-                            <InputLabel id="demo-simple-select-label-2">Cụm rạp</InputLabel>
+                            <InputLabel id="demo-simple-select-label-2">{t('home:cinema')}</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label-2"
                                 value={cinemaSelectedId}
@@ -165,8 +167,8 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                                     </Box>
                                 </CardContent>
                                 <CardActions>
-                                    <Button size="small">Chi tiết phim</Button>
-                                    <Button size="small">Đặt vé</Button>
+                                    <Button size="small">{t('home:details')}</Button>
+                                    <Button size="small">{t('home:booking')}</Button>
                                 </CardActions>
                             </Card>
                         ))}

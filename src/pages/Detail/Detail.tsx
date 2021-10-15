@@ -25,10 +25,13 @@ import { IShowtimes } from '../../formatTypes/Showtimes';
 import { IInterest } from '../../formatTypes/Interest';
 import moment from 'moment';
 import { Typography } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
+
 
 interface Props {}
 
 const Detail = (props: Props) => {
+    const { i18n, t } = useTranslation(['detail']);
     const dispatch = useDispatch();
     const { maPhim }: any = useParams();
     useEffect(() => {
@@ -120,7 +123,7 @@ const Detail = (props: Props) => {
                             )}
                             {filmDetail?.dangChieu && (
                                 <Chip
-                                    label="Đang chiếu"
+                                    label={t('detail:now-showing')}
                                     sx={{
                                         bgcolor: 'error.main',
                                         color: 'error.contrastText',
@@ -131,7 +134,7 @@ const Detail = (props: Props) => {
 
                             {filmDetail?.sapChieu && (
                                 <Chip
-                                    label="Sắp chiếu"
+                                    label={t('detail:coming-soon')}
                                     sx={{
                                         bgcolor: 'error.main',
                                         color: 'error.contrastText',
@@ -150,7 +153,7 @@ const Detail = (props: Props) => {
                             sx={{ marginBottom: '1rem' }}
                         >
                             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                                <Typography variant="h6">Mô tả</Typography>
+                                <Typography variant="h6">{t('detail:description')}</Typography>
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Typography>{filmDetail?.moTa}</Typography>
@@ -158,12 +161,12 @@ const Detail = (props: Props) => {
                         </Accordion>
 
                         <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
-                            <InputLabel id="demo-simple-select-label">Hệ thống rạp</InputLabel>
+                            <InputLabel id="demo-simple-select-label">{t('detail:theater-system')}</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={cineplexSelected}
-                                label="Hệ thống rạp"
+                                label={t('detail:theater-system')}
                                 onChange={handleChangeCineplex}
                             >
                                 {filmShowtimes?.heThongRapChieu.map((item, key) => (
@@ -174,7 +177,7 @@ const Detail = (props: Props) => {
                             </Select>
                         </FormControl>
                         <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
-                            <InputLabel id="demo-simple-select-label">Cụm rạp</InputLabel>
+                            <InputLabel id="demo-simple-select-label">{t('detail:cinema')}</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
@@ -192,7 +195,7 @@ const Detail = (props: Props) => {
                         </FormControl>
                         <Box>
                             <Typography variant="h5" style={{ marginBottom: '.5rem' }}>
-                                Lịch chiếu
+                            {t('detail:showtimes')}
                             </Typography>
                             <Box sx={{ display: 'flex', gap: '.5rem' }}>
                                 {lichChieuPhim?.map((item, key) => {
