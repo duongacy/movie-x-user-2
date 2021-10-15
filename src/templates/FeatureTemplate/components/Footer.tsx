@@ -1,10 +1,13 @@
 import { Col, Dropdown, Row } from 'react-bootstrap';
 import { Grid, Box, Container, Typography } from '@mui/material';
 import React, { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
+
 const Footer = (props: Props) => {
+    const { i18n, t } = useTranslation(['common']);
     return (
         <Box sx={{ bgcolor: 'primary.dark' }}>
             <Container>
@@ -13,22 +16,21 @@ const Footer = (props: Props) => {
                         <FooterBox>
                             <FooterListCaption>MovieX</FooterListCaption>
                             <Typography sx={{ paddingY: '.3rem' }}>
-                                Địa chỉ: Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Tp. Hồ Chí
-                                Minh, Việt Nam.
+                                {t('common:address')}
                             </Typography>
 
                             <Typography sx={{ paddingY: '.3rem' }}>
-                                Giấy chứng nhận đăng ký kinh doanh số: 0101659783
+                                {t('common:certificate-number')}
                             </Typography>
                             <Typography sx={{ paddingY: '.3rem' }}>
-                                Hotline: 1900 545 436
+                            {t('common:hotline')}
                             </Typography>
                             <img src="/images/bct.png" height="55" alt="" />
                         </FooterBox>
                     </Grid>
                     <Grid item md={3}>
                         <FooterBox>
-                            <FooterListCaption>Resource</FooterListCaption>
+                            <FooterListCaption>{t('common:resource')}</FooterListCaption>
                             <FooterUl>
                                 <FooterListItem>React</FooterListItem>
                                 <FooterListItem>Material UI</FooterListItem>
@@ -38,7 +40,7 @@ const Footer = (props: Props) => {
                     </Grid>
                     <Grid item md={3}>
                         <FooterBox>
-                            <FooterListCaption>App</FooterListCaption>
+                            <FooterListCaption>{t('common:application')}</FooterListCaption>
                             <FooterUl>
                                 <FooterListItem>App store</FooterListItem>
                                 <FooterListItem>Google play</FooterListItem>

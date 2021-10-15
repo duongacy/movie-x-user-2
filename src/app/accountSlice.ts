@@ -1,20 +1,26 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { IUser, IUserLogin } from '../formatTypes/Account';
 import { loginService } from '../services/account.services';
+// import { IFilm } from '../formatTypes/Film';
+// import { IShowtimes } from '../formatTypes/Showtimes';
+// import { getFilmDetailService, getShowtimeByFilmService } from '../services/film.services';
 
 interface IAccountState {
-    userLocal: IUser | null;
+    isLogged: boolean;
+    userLocal: any | null;
 }
+// interface DetailState {
+//     filmDetail: IFilm | null;
+//     filmShowtimes: IShowtimes | null;
+// }
 
 const initialState: IAccountState = {
+    isLogged: false,
     userLocal: null,
 };
 
 export const login = createAsyncThunk('account/login', async (user: IUserLogin) => {
-    console.log('user:', user);
     const result = await loginService(user);
-    console.log('result.data.content login:', result.data.content);
-
     return result.data.content;
 });
 
@@ -38,6 +44,7 @@ const accountSlice = createSlice({
         });
         builder.addCase(getUserLocal.fulfilled, (state, action) => {
             state.userLocal = action.payload;
+            console.log('aaaa');
         });
     },
 });

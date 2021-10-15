@@ -1,0 +1,17 @@
+{
+    "screen" : "Màn hình",
+    "normal" : "Ghế thường",
+    "vip" : "Ghế VIP",
+    "checked" : "Ghế đang chọn",
+    "occupied" : "Ghế đã đặt",
+    "unavailable" : "Không thể chọn",
+    "theater" : "Tên cụm rạp",
+    "screen-number" : "Tên rạp",
+    "date" : "Ngày chiếu",
+    "time" : "Giờ chiếu",
+    "not-select" : "Chưa chọn ghế",
+    "selected" : "Ghế đã chọn",
+    "total-payment" : "Tổng thanh toán",
+    "booking" : "Đặt vé",
+    "booking-success" : "Đặt vé thành công!"
+}

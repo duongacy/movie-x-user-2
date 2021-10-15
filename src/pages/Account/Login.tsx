@@ -1,5 +1,5 @@
 import { Container, Typography, Button } from '@material-ui/core';
-import React, { FormEventHandler, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
@@ -11,27 +11,24 @@ import Visibility from '@mui/icons-material/Visibility';
 import { Checkbox, FormControlLabel } from '@mui/material';
 import { RootState } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserLocal, login } from '../../app/accountSlice';
-import { IUserLogin } from '../../formatTypes/Account';
+import { getUserLocal } from '../../app/accountSlice';
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
 const Login = (props: Props) => {
-    const { userLocal } = useSelector((state: RootState) => state.account);
+    const { i18n, t } = useTranslation(['account']);
+    const { isLogged, userLocal } = useSelector((state: RootState) => state.account);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getUserLocal());
     }, []);
     useEffect(() => {
-        console.log('userLocal:', userLocal);
-    }, [userLocal]);
+        console.log('isLogged:', isLogged);
+    }, [isLogged]);
 
     const [values, setValues] = React.useState({
         showPassword: false,
-    });
-    const [userInput, setUserInput] = useState<IUserLogin>({
-        taiKhoan: '',
-        matKhau: '',
     });
 
     const handleClickShowPassword = () => {
@@ -43,27 +40,7 @@ const Login = (props: Props) => {
     const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
     };
-    const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-        setUserInput({
-            ...userInput,
-            matKhau: value,
-        });
-    };
-    const handleChangeUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { value } = event.target;
-        setUserInput({
-            ...userInput,
-            taiKhoan: value,
-        });
-    };
-
-    const handleSubmit = () => {
-        console.log('hihi');
-
-        dispatch(login(userInput));
-    };
-
+    const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {};
     return (
         <Container>
             <Box
@@ -93,15 +70,15 @@ const Login = (props: Props) => {
                     }}
                 >
                     <Typography variant="h4" style={{ textTransform: 'uppercase' }}>
-                        Đăng nhập
+                    {t('account:log-in')}
                     </Typography>
                     <FormControl variant="standard">
-                        <InputLabel htmlFor="standard-adornment-username">Username</InputLabel>
-                        <Input id="standard-adornment-username" onChange={handleChangeUsername} />
+                        <InputLabel htmlFor="standard-adornment-username">{t('account:username')}</InputLabel>
+                        <Input id="standard-adornment-username" />
                     </FormControl>
 
                     <FormControl variant="standard">
-                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-password">{t('account:password')}</InputLabel>
                         <Input
                             id="standard-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}
@@ -121,7 +98,7 @@ const Login = (props: Props) => {
                     </FormControl>
                     <FormControlLabel
                         control={<Checkbox defaultChecked />}
-                        label="Nhớ tài khoản đăng nhập"
+                        label={t('account:remember-me')}
                     />
 
                     <Box
@@ -134,9 +111,8 @@ const Login = (props: Props) => {
                             variant="contained"
                             size="large"
                             style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
-                            onClick={handleSubmit}
                         >
-                            Đăng nhập
+                            {t('account:log-in')}
                         </Button>
                     </Box>
                 </Box>
