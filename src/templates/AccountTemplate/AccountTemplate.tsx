@@ -12,7 +12,6 @@ const AccountTemplate: React.FC<Props> = ({ children }) => {
                 backgroundSize: 'cover',
             }}
         >
-            <div>Account template</div>
             {children}
         </div>
     );

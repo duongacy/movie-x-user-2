@@ -13,18 +13,16 @@ import { RootState } from '../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserLocal, login } from '../../app/accountSlice';
 import { IUserLogin } from '../../formatTypes/Account';
+import { useHistory } from 'react-router';
 
 interface Props {}
 
 const Login = (props: Props) => {
-    const { userLocal } = useSelector((state: RootState) => state.account);
+    const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getUserLocal());
     }, []);
-    useEffect(() => {
-        console.log('userLocal:', userLocal);
-    }, [userLocal]);
 
     const [values, setValues] = React.useState({
         showPassword: false,
@@ -59,9 +57,8 @@ const Login = (props: Props) => {
     };
 
     const handleSubmit = () => {
-        console.log('hihi');
-
         dispatch(login(userInput));
+        console.log(history);
     };
 
     return (

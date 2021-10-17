@@ -6,9 +6,16 @@ interface Props {}
 
 const FeatureTemplate: React.FC<Props> = ({ children }) => {
     return (
-        <div className="d-flex flex-column min-vh-100">
+        <div
+            style={{
+                display: 'flex',
+                minHeight: '100vh',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+            }}
+        >
             <Header />
-            <main style={{ flex: 'auto' }}>{children}</main>
+            <main style={{ flex: 'auto', paddingTop: '1rem' }}>{children}</main>
             <Footer />
         </div>
     );

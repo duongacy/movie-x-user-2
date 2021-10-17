@@ -1,7 +1,8 @@
-import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import {
     Avatar,
     Divider,
@@ -26,16 +27,25 @@ import {
     Menu as MenuIcon,
     Logout as LogoutIcon,
     Inbox as InboxIcon,
+    LoginOutlined,
 } from '@mui/icons-material';
+import { RootState } from '../../../app/store';
+import { useEffect, useState } from 'react';
+import { getUserLocal } from '../../../app/accountSlice';
 
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
 
 export default function Header() {
+    const dispatch = useDispatch();
+    const { userLocal } = useSelector((state: RootState) => state.account);
     const { i18n, t } = useTranslation(['common']);
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
+    useEffect(() => {
+        dispatch(getUserLocal());
+    }, []);
     const menuId = 'primary-search-account-menu';
     const open = Boolean(anchorEl);
     const handleClose = () => {
@@ -44,6 +54,13 @@ export default function Header() {
     const handleChangeLanguage = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { value } = event.target;
         i18n.changeLanguage(value);
+    };
+    const history = useHistory();
+    const handleLogin = () => {
+        if (userLocal) {
+            localStorage.removeItem('userLocal');
+        }
+        history.push('/login');
     };
     const renderMenu = (
         <Menu
@@ -81,14 +98,25 @@ export default function Header() {
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
             <MenuItem>
-                <Avatar /> YLVN
+                <Avatar /> {userLocal?.hoTen}
             </MenuItem>
             <Divider />
-            <MenuItem>
-                <ListItemIcon>
-                    <LogoutIcon fontSize="small" />
-                </ListItemIcon>
-                Đăng xuất
+            <MenuItem onClick={handleLogin}>
+                {userLocal ? (
+                    <>
+                        <ListItemIcon>
+                            <LogoutIcon fontSize="small" />
+                        </ListItemIcon>
+                        Đăng xuất
+                    </>
+                ) : (
+                    <>
+                        <ListItemIcon>
+                            <LoginOutlined fontSize="small" />
+                        </ListItemIcon>
+                        Đăng nhập
+                    </>
+                )}
             </MenuItem>
         </Menu>
     );
@@ -110,7 +138,7 @@ export default function Header() {
         <Box
             sx={{
                 width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
-                height: '100vh',
+                // height: '100vh',
             }}
             role="presentation"
             onClick={toggleDrawer(false)}
@@ -145,7 +173,7 @@ export default function Header() {
         </Box>
     );
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box>
             <AppBar position="static">
                 <Toolbar sx={{ paddingY: '1rem' }}>
                     <React.Fragment>

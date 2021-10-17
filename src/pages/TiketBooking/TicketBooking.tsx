@@ -26,6 +26,14 @@ const seatStyles: {
     Vip: 'warning.main',
 };
 const dayGhe = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+export const convertSeat = (seatNumber: number) => {
+    let dayGhe = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+    let soGhe = (seatNumber + 1) % 16;
+    if (soGhe === 0) soGhe = 16;
+    const soDay = dayGhe[Math.round(seatNumber / 16)];
+    const tenGhe = soDay + soGhe;
+    return tenGhe;
+};
 interface Props {}
 
 const TicketBooking = (props: Props) => {
@@ -40,15 +48,10 @@ const TicketBooking = (props: Props) => {
     }, []);
 
     const addSeat = (item: ISeat, key: number) => {
-        let soGhe = (key + 1) % 16;
-        if (soGhe === 0) soGhe = 16;
-        const soDay = dayGhe[Math.round(key / 16)];
-        const tenGhe = soDay + soGhe;
-
         const newTicket: ITicket = {
             maGhe: item.maGhe,
             giaVe: item.giaVe,
-            tenGheHienThi: tenGhe,
+            tenGheHienThi: convertSeat(key),
         };
         const isExist = danhSachVe.some((item) => item.maGhe === newTicket.maGhe);
         if (isExist) {
@@ -202,7 +205,10 @@ const TicketBooking = (props: Props) => {
                                 </Typography>
                             </Box>
                             <Box style={{ textAlign: 'right' }}>
-                                <CheckoutButton callbackClick={handleBookTicket} disabled = {danhSachVe.length===0} >
+                                <CheckoutButton
+                                    callbackClick={handleBookTicket}
+                                    disabled={danhSachVe.length === 0}
+                                >
                                     Đặt vé
                                 </CheckoutButton>
                             </Box>

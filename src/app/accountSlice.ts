@@ -1,20 +1,19 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IUser, IUserLogin } from '../formatTypes/Account';
-import { loginService } from '../services/account.services';
+import { IBookingInfo, IUser, IUserLogin } from '../formatTypes/Account';
+import { getUserInfoByAccessTokenService, loginService } from '../services/account.services';
 
 interface IAccountState {
     userLocal: IUser | null;
+    bookingInfo: IBookingInfo[];
 }
 
 const initialState: IAccountState = {
     userLocal: null,
+    bookingInfo: [],
 };
 
 export const login = createAsyncThunk('account/login', async (user: IUserLogin) => {
-    console.log('user:', user);
     const result = await loginService(user);
-    console.log('result.data.content login:', result.data.content);
-
     return result.data.content;
 });
 
@@ -28,16 +27,27 @@ export const getUserLocal = createAsyncThunk('account/getUserLocal', async () =>
     }
 });
 
+export const getUserInfoByAccessToken = createAsyncThunk(
+    'account/getUserInfoByAccessToken',
+    async (accessToken: string) => {
+        const result = await getUserInfoByAccessTokenService(accessToken);
+        return result.data.content;
+    }
+);
+
 const accountSlice = createSlice({
     name: 'account',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(login.fulfilled, (state, action) => {
-            console.log(action.payload);
+            localStorage.setItem('userLocal', JSON.stringify(action.payload));
         });
         builder.addCase(getUserLocal.fulfilled, (state, action) => {
             state.userLocal = action.payload;
+        });
+        builder.addCase(getUserInfoByAccessToken.fulfilled, (state, action) => {
+            state.bookingInfo = action.payload.thongTinDatVe;
         });
     },
 });
