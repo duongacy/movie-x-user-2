@@ -18,7 +18,7 @@ const Trailer = (props: ITrailerProps) => {
     const { t } = useTranslation(['home']);
 
     return (
-        <Carousel isRTL={false} showArrows={false}>
+        <Carousel isRTL={false} showArrows={false} pagination={false}>
             {banners.map((item) => (
                 <Box
                     key={item.maBanner}
