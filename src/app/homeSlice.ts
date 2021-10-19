@@ -1,9 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { IBanner } from '../formatTypes/Banner';
 import { ICinema } from '../formatTypes/Cinema';
 import { IFilm } from '../formatTypes/Film';
 import { IMultiplex } from '../formatTypes/Multiplex';
 import { IShowtimes } from '../formatTypes/Showtimes';
-import { getAllFilmService, getShowtimeByFilmService } from '../services/film.services';
+import {
+    getAllFilmService,
+    getBannerService,
+    getShowtimeByFilmService,
+} from '../services/film.services';
 import { getAllMultiplexService } from '../services/multiplex.services';
 import { getAllShowtimeByMultiplexService } from '../services/showtimes.services';
 
@@ -15,6 +20,7 @@ interface HomeState {
     films: IFilm[];
     showingFilms: IFilm[];
     comingFilms: IFilm[];
+    banners: IBanner[];
 }
 
 const initialState: HomeState = {
@@ -25,6 +31,7 @@ const initialState: HomeState = {
     films: [],
     showingFilms: [],
     comingFilms: [],
+    banners: [],
 };
 
 export const getAllMultiplex = createAsyncThunk('home/getAllMultiplex', async () => {
@@ -46,8 +53,12 @@ export const getAllShowtimeByMultiplex = createAsyncThunk(
 );
 
 export const getAllFilm = createAsyncThunk('home/getAllFilm', async () => {
-    getAllFilmService();
     const result = await getAllFilmService();
+    return result.data.content;
+});
+
+export const getBanners = createAsyncThunk('home/getBanners', async () => {
+    const result = await getBannerService();
     return result.data.content;
 });
 
@@ -78,6 +89,10 @@ const homeSlice = createSlice({
             console.log('showing:', state.showingFilms);
 
             state.comingFilms = action.payload.filter((item: IFilm) => item.sapChieu === true);
+        });
+        builder.addCase(getBanners.fulfilled, (state, action) => {
+            state.banners = action.payload;
+            console.log(' action.payload:', action.payload);
         });
     },
 });

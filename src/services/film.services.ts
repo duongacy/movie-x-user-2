@@ -33,3 +33,14 @@ export const getFilmDetailService = (maPhim: number) => {
     });
     return promise;
 };
+
+export const getBannerService = () => {
+    const promise = axios({
+        method: 'get',
+        url: `${BASE_URL}api/QuanLyPhim/LayDanhSachBanner`,
+        headers: {
+            TokenCybersoft: TOKEN_CYBERSOFT,
+        },
+    });
+    return promise;
+};

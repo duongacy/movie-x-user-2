@@ -15,7 +15,7 @@ const FeatureTemplate: React.FC<Props> = ({ children }) => {
             }}
         >
             <Header />
-            <main style={{ flex: 'auto', paddingTop: '1rem' }}>{children}</main>
+            <main style={{ flex: 'auto' }}>{children}</main>
             <Footer />
         </div>
     );

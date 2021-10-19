@@ -8,7 +8,7 @@ interface Props {}
 
 const Home = (props: Props) => {
     return (
-        <Box sx={{ bgcolor: 'secondary.dark', paddingY:'3rem' }} >
+        <Box sx={{ bgcolor: 'secondary.dark' }} >
             <Trailer />
             <FilmBlock />
             <Showtimes />

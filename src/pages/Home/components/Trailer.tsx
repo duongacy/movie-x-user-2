@@ -1,64 +1,37 @@
 import { Ratio } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-// import Carousel from 'react-material-ui-carousel';
+import Carousel from 'react-elastic-carousel';
 import { Paper, Button } from '@material-ui/core';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getBanners } from '../../../app/homeSlice';
+import { RootState } from '../../../app/store';
+import { Box } from '@mui/system';
 
 interface ITrailerProps {}
 const Trailer = (props: ITrailerProps) => {
+    const dispatch = useDispatch();
+    const { banners } = useSelector((state: RootState) => state.home);
+    useEffect(() => {
+        dispatch(getBanners());
+    }, []);
     const { t } = useTranslation(['home']);
+
     return (
-        <div></div>
-        // <Carousel>
-        //     <Item
-        //         name="Random Name #1"
-        //         description="Probably the most random thing you have ever seen!"
-        //     ></Item>
-        //     <Item
-        //         name="Random Name #1"
-        //         description="Probably the most random thing you have ever seen!"
-        //     ></Item>
-        // </Carousel>
-        // <Ratio className="ratio-4x3 ratio-md-16x9 ratio-lg-21x9">
-        //     <Carousel className="trailer-carousel" interval={null}>
-        //         <Carousel.Item className="bg-success">
-        //             <img
-        //                 src="images/Interstellar-HD_m.webp"
-        //                 width="100%"
-        //                 height="100%"
-        //                 style={{ objectFit: 'cover' }}
-        //             />
-        //             <Carousel.Caption className="bg-white text-red-800 text-2xl">
-        //                 <h1 className="text-uppercase text-4xl">THE MATRIX 4 RESURRECTIONS</h1>
-        //                 {/* <p className='text-2xl'>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> */}
-        //                 <p className="text-2xl">{t('home:hello')}</p>
-        //             </Carousel.Caption>
-        //         </Carousel.Item>
-        //         <Carousel.Item className="bg-success">
-        //             <img
-        //                 src="images/star-wars-star-wars-the-rise-of-skywalker-movie-poster-poster-movie-characters-hd-wallpaper-preview.jpg"
-        //                 width="100%"
-        //                 height="100%"
-        //                 style={{ objectFit: 'cover' }}
-        //             />
-        //             <Carousel.Caption>
-        //                 <h1 className="text-uppercase">THE MATRIX 4 RESURRECTIONS</h1>
-        //                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        //             </Carousel.Caption>
-        //         </Carousel.Item>
-        //         <Carousel.Item className="bg-success">
-        //             <img
-        //                 src="images/the-dark-knight-batman-movies-wallpaper-preview.jpg"
-        //                 width="100%"
-        //                 height="100%"
-        //                 style={{ objectFit: 'cover' }}
-        //             />
-        //             <Carousel.Caption>
-        //                 <h1 className="text-uppercase">THE MATRIX 4 RESURRECTIONS</h1>
-        //                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        //             </Carousel.Caption>
-        //         </Carousel.Item>
-        //     </Carousel>
-        // </Ratio>
+        <Carousel isRTL={false} showArrows={false}>
+            {banners.map((item) => (
+                <Box
+                    key={item.maBanner}
+                    sx={{
+                        width: '100%',
+                        height: '750px',
+                        backgroundImage: `url(${item.hinhAnh})`,
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'cover',
+                    }}
+                ></Box>
+            ))}
+        </Carousel>
     );
 };
 
