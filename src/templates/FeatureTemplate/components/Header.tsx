@@ -107,14 +107,14 @@ export default function Header() {
                         <ListItemIcon>
                             <LogoutIcon fontSize="small" />
                         </ListItemIcon>
-                        Đăng xuất
+                        {t('common:log-out')}
                     </>
                 ) : (
                     <>
                         <ListItemIcon>
                             <LoginOutlined fontSize="small" />
                         </ListItemIcon>
-                        Đăng nhập
+                        {t('common:log-in')}
                     </>
                 )}
             </MenuItem>
@@ -149,25 +149,25 @@ export default function Header() {
                     <ListItemIcon>
                         <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary={'Lịch chiếu'} />
+                    <ListItemText primary={t('common:showtimes')} />
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
                         <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary={'Cụm rạp'} />
+                    <ListItemText primary={t('common:cinema')} />
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
                         <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary={'Tin tức'} />
+                    <ListItemText primary={t('common:news')} />
                 </ListItem>
                 <ListItem button>
                     <ListItemIcon>
                         <InboxIcon />
                     </ListItemIcon>
-                    <ListItemText primary={'Ứng dụng'} />
+                    <ListItemText primary={t('common:application')} />
                 </ListItem>
             </List>
         </Box>
@@ -226,17 +226,17 @@ export default function Header() {
                         </Typography>
                         <Typography variant="h6">
                             <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                                Cụm rạp
+                            {t('common:cinema')}
                             </Link>
                         </Typography>
                         <Typography variant="h6">
                             <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                                Tin tức
+                            {t('common:news')}
                             </Link>
                         </Typography>
                         <Typography variant="h6">
                             <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                                Ứng dụng
+                            {t('common:application')}
                             </Link>
                         </Typography>
                     </Box>

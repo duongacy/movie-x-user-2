@@ -14,10 +14,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getUserLocal, login } from '../../app/accountSlice';
 import { IUserLogin } from '../../formatTypes/Account';
 import { useHistory } from 'react-router';
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
 const Login = (props: Props) => {
+    const { i18n, t } = useTranslation(['account']);
     const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -90,15 +92,15 @@ const Login = (props: Props) => {
                     }}
                 >
                     <Typography variant="h4" style={{ textTransform: 'uppercase' }}>
-                        Đăng nhập
+                    {t('account:log-in')}
                     </Typography>
                     <FormControl variant="standard">
-                        <InputLabel htmlFor="standard-adornment-username">Username</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-username">{t('account:username')}</InputLabel>
                         <Input id="standard-adornment-username" onChange={handleChangeUsername} />
                     </FormControl>
 
                     <FormControl variant="standard">
-                        <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-password">{t('account:password')}</InputLabel>
                         <Input
                             id="standard-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}
@@ -118,7 +120,7 @@ const Login = (props: Props) => {
                     </FormControl>
                     <FormControlLabel
                         control={<Checkbox defaultChecked />}
-                        label="Nhớ tài khoản đăng nhập"
+                        label={t('account:remember-me')}
                     />
 
                     <Box
@@ -133,7 +135,7 @@ const Login = (props: Props) => {
                             style={{ paddingLeft: '2.5rem', paddingRight: '2.5rem' }}
                             onClick={handleSubmit}
                         >
-                            Đăng nhập
+                            {t('account:log-in')}
                         </Button>
                     </Box>
                 </Box>

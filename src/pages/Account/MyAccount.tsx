@@ -23,6 +23,8 @@ import Stack from '@mui/material/Stack';
 import Chip from '@mui/material/Chip';
 import { convertSeat } from '../TiketBooking/TicketBooking';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+
 function TabPanel(props: any) {
     const { children, value, index, ...other } = props;
 
@@ -53,6 +55,7 @@ function a11yProps(index: any) {
 }
 
 export default function BasicTabs() {
+    const { i18n, t } = useTranslation(['account']);
     const { userLocal, bookingInfo } = useSelector((state: RootState) => state.account);
     const [value, setValue] = React.useState(0);
     const dispatch = useDispatch();
@@ -73,19 +76,19 @@ export default function BasicTabs() {
             <Box sx={{ width: '100%', alignItems: 'start' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                        <Tab label="Thông tin khách hàng" {...a11yProps(0)} />
-                        <Tab label="Lịch sử đặt vé" {...a11yProps(1)} />
+                        <Tab label={t('account:user-information')} {...a11yProps(0)} />
+                        <Tab label={t('account:booking-history')} {...a11yProps(1)} />
                     </Tabs>
                 </Box>
                 <TabPanel value={value} index={0}>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableRow>
-                                <TableCell>Tài khoản</TableCell>
-                                <TableCell>{userLocal?.taiKhoan}</TableCell>
+                                <TableCell>{t('account:username')}</TableCell>
+                                <TableCell>{userLocal?.taiKhoan}</TableCell>                               
                             </TableRow>
                             <TableRow>
-                                <TableCell>Họ tên</TableCell>
+                                <TableCell>{t('account:full-name')}</TableCell>
                                 <TableCell>{userLocal?.hoTen}</TableCell>
                             </TableRow>
                             <TableRow>
@@ -93,11 +96,11 @@ export default function BasicTabs() {
                                 <TableCell>{userLocal?.email}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Số điện thoại</TableCell>
+                                <TableCell>{t('account:phone-number')}</TableCell>
                                 <TableCell>{userLocal?.soDT}</TableCell>
                             </TableRow>
                             <TableRow>
-                                <TableCell>Loại người dùng</TableCell>
+                                <TableCell>{t('account:user-type')}</TableCell>
                                 <TableCell>{userLocal?.maLoaiNguoiDung}</TableCell>
                             </TableRow>
                         </Table>
@@ -126,26 +129,26 @@ export default function BasicTabs() {
                                             <Table sx={{ width: '100%' }}>
                                                 <TableRow>
                                                     <TableCell style={{ width: '100px' }}>
-                                                        Giá vé:
+                                                    {t('account:ticket-price')}
                                                     </TableCell>
                                                     <TableCell>{item.giaVe}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell>Ngày đặt vé:</TableCell>
+                                                    <TableCell>{t('account:booking-date')}</TableCell>
                                                     <TableCell>
                                                         {moment(item.ngayDat).format('DD-MM-YYYY')}
                                                     </TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell>Thời lượng phim:</TableCell>
+                                                    <TableCell>{t('account:movie-duration')}</TableCell>
                                                     <TableCell>{item.thoiLuongPhim} phút</TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell>Giá vé:</TableCell>
+                                                    <TableCell>{t('account:ticket-price')}</TableCell>
                                                     <TableCell>{item.giaVe}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell>Danh sách ghế:</TableCell>
+                                                    <TableCell>{t('account:seat-list')}</TableCell>
                                                     <TableCell>
                                                         <Box
                                                             style={{

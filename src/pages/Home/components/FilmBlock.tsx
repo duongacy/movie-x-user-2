@@ -6,6 +6,7 @@ import { RootState } from '../../../app/store';
 import { Link } from 'react-router-dom';
 import { Container, Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import Rating from '@mui/material/Rating';
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
@@ -15,6 +16,7 @@ const breakPoints = [
     { width: 992, itemsToShow: 4, itemsToScroll: 4 },
 ];
 const FilmBlock = (props: Props) => {
+    const { i18n, t } = useTranslation(['home']);
     const dispatch = useDispatch();
     const { films, showingFilms, comingFilms } = useSelector((state: RootState) => state.home);
 
@@ -23,7 +25,7 @@ const FilmBlock = (props: Props) => {
     }, []);
     useEffect(() => {
         console.log('films:', films);
-    }, [films]);
+    }, [films]); 
 
     return (
         <Box>
@@ -32,7 +34,7 @@ const FilmBlock = (props: Props) => {
                     variant="h4"
                     sx={{ marginBottom: '1rem', color: 'secondary.contrastText' }}
                 >
-                    Đang chiếu
+                    {t('home:now-showing')}
                 </Typography>
                 <Box
                     sx={{
@@ -92,7 +94,7 @@ const FilmBlock = (props: Props) => {
                                             value={item.danhGia / 2}
                                             readOnly
                                         />
-                                        <Button variant="contained">Đặt vé</Button>
+                                        <Button variant="contained">{t('home:booking')}</Button>
                                     </Box>
                                 </CardContent>
                             </FilmBlockItem.Wrapper>
@@ -105,7 +107,7 @@ const FilmBlock = (props: Props) => {
                     variant="h4"
                     sx={{ marginBottom: '1rem', color: 'secondary.contrastText' }}
                 >
-                    Sắp chiếu
+                    {t('home:coming-soon')}
                 </Typography>
                 <Box
                     sx={{
@@ -165,7 +167,7 @@ const FilmBlock = (props: Props) => {
                                             value={item.danhGia / 2}
                                             readOnly
                                         />
-                                        <Button variant="contained">Đặt vé</Button>
+                                        <Button variant="contained">{t('home:booking')}</Button>
                                     </Box>
                                 </CardContent>
                             </FilmBlockItem.Wrapper>

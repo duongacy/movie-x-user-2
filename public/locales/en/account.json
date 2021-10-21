@@ -1,0 +1,18 @@
+{
+    "log-in" : "Log in",
+    "log-out" : "Log out",
+    "register" : "Register",
+    "username" : "Username",
+    "password" : "Password",
+    "remember-me" : "Remember me",
+    "my-account" : "My account",
+    "user-information" : "User information",
+    "booking-history" : "Booking history",
+    "full-name" : "Full name",
+    "phone-number" : "Phone number",
+    "user-type" : "User type",
+    "ticket-price" : "Ticket price:",
+    "booking-date" : "Booking date:",
+    "movie-duration" : "Movie duration:",
+    "seat-list" : "Seat list:"
+}
