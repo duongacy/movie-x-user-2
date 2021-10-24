@@ -1,9 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface Props {}
 
 const Register = (props: Props) => {
-    return <div>Register</div>;
+    const { i18n, t } = useTranslation(['account']);
+    return ( <div>{t('account:register')}</div>)
 };
 
 export default Register;

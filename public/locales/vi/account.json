@@ -1,0 +1,18 @@
+{
+    "log-in" : "Đăng nhập",
+    "log-out" : "Đăng xuất",
+    "register" : "Đăng ký",
+    "username" : "Tên đăng nhập",
+    "password" : "Mật khẩu",
+    "remember-me" : "Ghi nhớ tài khoản đăng nhập",
+    "my-account" : "Tài khoản của tôi",
+    "user-information" : "Thông tin khách hàng",
+    "booking-history" : "Lịch sử đặt vé",
+    "full-name" : "Họ tên",
+    "phone-number" : "Số điện thoại",
+    "user-type" : "Loại người dùng",
+    "ticket-price" : "Giá vé:",
+    "booking-date" : "Ngày đặt vé:",
+    "movie-duration" : "Thời lượng phim:",
+    "seat-list" : "Danh sách ghế:"
+}

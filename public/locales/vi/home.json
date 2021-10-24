@@ -1,3 +1,11 @@
 {
-    "hello": "Xin chao"
-}
+    "hello": "Xin chào",
+    "now-showing" : "Đang chiếu",
+    "booking" : "Đặt vé",
+    "coming-soon" : "Sắp chiếu",
+    "showtimes": "Lịch chiếu",
+    "cinema": "Cụm rạp",
+    "theater-system" : "Hệ thống rạp",
+    "details" : "Xem chi tiết",
+    "check": "Kiểm tra!"
+} 

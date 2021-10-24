@@ -1,3 +1,16 @@
 {
-    "showtimes": "Lịch chiếu"
-}
+    "showtimes": "Lịch chiếu",
+    "cinema": "Cụm rạp",
+    "news": "Tin tức",
+    "application": "Ứng dụng",
+    "now-showing" : "Đang chiếu",
+    "coming-soon" : "Sắp chiếu",
+    "address": "Địa chỉ: Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Tp. Hồ Chí Minh, Việt Nam.",
+    "certificate-number" : "Giấy chứng nhận đăng ký kinh doanh số: 0101659783",
+    "hotline": "Đường dây nóng : 1900 545 436",
+    "resource" : "Tài nguyên",
+    "theater-system" : "Hệ thống rạp",
+    "log-out" : "Đăng xuất",
+    "log-in" : "Đăng nhập",
+    "account-template" : "Mẫu tài khoản"
+} 

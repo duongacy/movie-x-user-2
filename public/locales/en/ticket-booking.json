@@ -1,0 +1,17 @@
+{   
+    "screen" : "Screen",
+    "normal" : "Normal",
+    "vip" : "VIP",
+    "checked" : "Checked",
+    "occupied" : "Occupied",
+    "unavailable" : "Unavailable",
+    "theater" : "Theater",
+    "screen-number" : "Screen number",
+    "date" : "Date",
+    "time" : "Time",
+    "not-select" : "Not selected yet ",
+    "selected" : "Selected",
+    "total-payment" : "Total Payment",
+    "booking" : "Booking",
+    "booking-success" : "Ticket booking successful!"
+}

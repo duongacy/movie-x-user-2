@@ -15,7 +15,7 @@ const Trailer = (props: ITrailerProps) => {
     useEffect(() => {
         dispatch(getBanners());
     }, []);
-    const { t } = useTranslation(['home']);
+    
 
     return (
         <Box sx={{ mb: '2rem' }}>
@@ -44,12 +44,13 @@ interface IItemProps {
     description: string;
 }
 const Item: React.FC<IItemProps> = (props) => {
+    const { t } = useTranslation(['home']);
     return (
         <Paper>
             <h2>{props.name}</h2>
             <p>{props.description}</p>
 
-            <Button className="CheckButton">Check it out!</Button>
+            <Button className="CheckButton">{t('home:check')}</Button>
         </Paper>
     );
 };
