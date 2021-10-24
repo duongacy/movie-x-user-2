@@ -18,20 +18,22 @@ const Trailer = (props: ITrailerProps) => {
     const { t } = useTranslation(['home']);
 
     return (
-        <Carousel isRTL={false} showArrows={false} pagination={false}>
-            {banners.map((item) => (
-                <Box
-                    key={item.maBanner}
-                    sx={{
-                        width: '100%',
-                        height: '750px',
-                        backgroundImage: `url(${item.hinhAnh})`,
-                        backgroundRepeat: 'no-repeat',
-                        backgroundSize: 'cover',
-                    }}
-                ></Box>
-            ))}
-        </Carousel>
+        <Box sx={{ mb: '2rem' }}>
+            <Carousel isRTL={false} showArrows={false} pagination={false}>
+                {banners.map((item) => (
+                    <Box
+                        key={item.maBanner}
+                        sx={{
+                            width: '100%',
+                            height: '750px',
+                            backgroundImage: `url(${item.hinhAnh})`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundSize: 'cover',
+                        }}
+                    ></Box>
+                ))}
+            </Carousel>
+        </Box>
     );
 };
 

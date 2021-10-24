@@ -164,10 +164,6 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                                         })}
                                     </Box>
                                 </CardContent>
-                                <CardActions>
-                                    <Button size="small">Chi tiết phim</Button>
-                                    <Button size="small">Đặt vé</Button>
-                                </CardActions>
                             </Card>
                         ))}
                     </Grid>

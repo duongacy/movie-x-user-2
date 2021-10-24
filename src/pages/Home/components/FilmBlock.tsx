@@ -92,7 +92,6 @@ const FilmBlock = (props: Props) => {
                                             value={item.danhGia / 2}
                                             readOnly
                                         />
-                                        <Button variant="contained">Đặt vé</Button>
                                     </Box>
                                 </CardContent>
                             </FilmBlockItem.Wrapper>
@@ -165,7 +164,6 @@ const FilmBlock = (props: Props) => {
                                             value={item.danhGia / 2}
                                             readOnly
                                         />
-                                        <Button variant="contained">Đặt vé</Button>
                                     </Box>
                                 </CardContent>
                             </FilmBlockItem.Wrapper>
