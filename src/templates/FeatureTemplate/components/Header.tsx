@@ -133,18 +133,21 @@ export default function Header() {
 
         setLeftDrawer(open);
     };
+    const [age, setAge] = React.useState('');
 
+    // const handleChange = (event: SelectChangeEvent<HTMLInputElement>) => {
+    //     setAge(event.target.value);
+    // };
     const list = (anchor: Anchor) => (
         <Box
             sx={{
                 width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
-                // height: '100vh',
             }}
             role="presentation"
             onClick={toggleDrawer(false)}
             onKeyDown={toggleDrawer(false)}
         >
-            <List>
+            {/* <List>
                 <ListItem button color="white">
                     <ListItemIcon>
                         <InboxIcon />
@@ -169,7 +172,7 @@ export default function Header() {
                     </ListItemIcon>
                     <ListItemText primary={t('common:application')} />
                 </ListItem>
-            </List>
+            </List> */}
         </Box>
     );
     return (
@@ -209,7 +212,7 @@ export default function Header() {
                     >
                         Movie YDT
                     </Typography>
-                    <Box
+                    {/* <Box
                         sx={{
                             display: { md: 'flex', xs: 'none' },
                             gap: '1rem',
@@ -220,42 +223,37 @@ export default function Header() {
                         }}
                     >
                         <Typography variant="h6">
-                            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
+                            <Link to="#showtimes" style={{ color: 'white', textDecoration: 'none' }}>
                                 {t('common:showtimes')}
                             </Link>
                         </Typography>
                         <Typography variant="h6">
-                            <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                            {t('common:cinema')}
+                            <Link to="/google.com" style={{ color: 'white', textDecoration: 'none' }}>
+                                {t('common:cinema')}
                             </Link>
                         </Typography>
                         <Typography variant="h6">
                             <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                            {t('common:news')}
+                                {t('common:news')}
                             </Link>
                         </Typography>
                         <Typography variant="h6">
                             <Link to="/" style={{ color: 'white', textDecoration: 'none' }}>
-                            {t('common:application')}
+                                {t('common:application')}
                             </Link>
                         </Typography>
-                    </Box>
+                    </Box> */}
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: 'flex' }}>
-                        <RadioGroup
-                            row
-                            name="change-language"
-                            defaultValue={i18n.language}
-                            onChange={handleChangeLanguage}
-                        >
+                        <RadioGroup row name="change-language" onChange={handleChangeLanguage}>
                             <FormControlLabel
                                 value="en"
-                                control={<Radio size="small" color="error" />}
+                                control={<Radio size="small" />}
                                 label="EN"
                             />
                             <FormControlLabel
                                 value="vi"
-                                control={<Radio size="small" color="error" />}
+                                control={<Radio size="small" />}
                                 label="VI"
                             />
                         </RadioGroup>

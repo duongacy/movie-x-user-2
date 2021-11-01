@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment, FC, ReactNode } from 'react';
+import { useEffect, FC, ReactNode } from 'react';
 import Carousel from 'react-elastic-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllFilm } from '../../../app/homeSlice';
@@ -23,9 +23,6 @@ const FilmBlock = (props: Props) => {
     useEffect(() => {
         dispatch(getAllFilm());
     }, []);
-    useEffect(() => {
-        console.log('films:', films);
-    }, [films]); 
 
     return (
         <Box>
@@ -94,7 +91,7 @@ const FilmBlock = (props: Props) => {
                                             value={item.danhGia / 2}
                                             readOnly
                                         />
-                                        <Button variant="contained">{t('home:booking')}</Button>
+                                        {/* <Button variant="contained">{t('home:booking')}</Button> */}
                                     </Box>
                                 </CardContent>
                             </FilmBlockItem.Wrapper>
@@ -167,7 +164,7 @@ const FilmBlock = (props: Props) => {
                                             value={item.danhGia / 2}
                                             readOnly
                                         />
-                                        <Button variant="contained">{t('home:booking')}</Button>
+                                        {/* <Button variant="contained">{t('home:booking')}</Button> */}
                                     </Box>
                                 </CardContent>
                             </FilmBlockItem.Wrapper>

@@ -1,5 +1,5 @@
 import { Container, Typography, Button } from '@material-ui/core';
-import React, { FormEventHandler, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,8 +9,7 @@ import IconButton from '@mui/material/IconButton';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
 import { Checkbox, FormControlLabel } from '@mui/material';
-import { RootState } from '../../app/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getUserLocal, login } from '../../app/accountSlice';
 import { IUserLogin } from '../../formatTypes/Account';
 import { useHistory } from 'react-router';
@@ -60,7 +59,6 @@ const Login = (props: Props) => {
 
     const handleSubmit = () => {
         dispatch(login(userInput));
-        console.log(history);
     };
 
     return (
@@ -92,15 +90,19 @@ const Login = (props: Props) => {
                     }}
                 >
                     <Typography variant="h4" style={{ textTransform: 'uppercase' }}>
-                    {t('account:log-in')}
+                        {t('account:log-in')}
                     </Typography>
                     <FormControl variant="standard">
-                        <InputLabel htmlFor="standard-adornment-username">{t('account:username')}</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-username">
+                            {t('account:username')}
+                        </InputLabel>
                         <Input id="standard-adornment-username" onChange={handleChangeUsername} />
                     </FormControl>
 
                     <FormControl variant="standard">
-                        <InputLabel htmlFor="standard-adornment-password">{t('account:password')}</InputLabel>
+                        <InputLabel htmlFor="standard-adornment-password">
+                            {t('account:password')}
+                        </InputLabel>
                         <Input
                             id="standard-adornment-password"
                             type={values.showPassword ? 'text' : 'password'}

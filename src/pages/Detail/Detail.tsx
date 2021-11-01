@@ -35,8 +35,6 @@ const Detail = (props: Props) => {
     const dispatch = useDispatch();
     const { maPhim }: any = useParams();
     useEffect(() => {
-        console.log('maPhim:', maPhim);
-
         dispatch(getFilmDetail(maPhim));
         dispatch(getShowtimeByFilm(maPhim));
     }, []);
@@ -48,10 +46,6 @@ const Detail = (props: Props) => {
     const [lichChieuPhim, setLichChieuPhim] = useState<IInterest[] | undefined>([]);
     const [selectedDay, setSelectedDay] = useState('DD/MM/YYYY');
     const [dsGioChieu, setDsGioChieu] = useState<any>([]);
-
-    useEffect(() => {
-        console.log('dsGioChieu:', lichChieuPhim);
-    }, [lichChieuPhim]);
 
     const handleChangeCineplex = (event: SelectChangeEvent) => {
         setLichChieuPhim([]);

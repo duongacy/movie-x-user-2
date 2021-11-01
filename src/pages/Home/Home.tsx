@@ -2,13 +2,13 @@ import Trailer from './components/Trailer';
 import './home.scss';
 import FilmBlock from './components/FilmBlock';
 import Showtimes from './components/Showtimes';
-import { Container, Box, Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import { useEffect } from 'react';
 
 interface Props {}
-
 const Home = (props: Props) => {
     return (
-        <Box sx={{ bgcolor: 'secondary.dark' }} >
+        <Box sx={{ bgcolor: 'secondary.dark' }}>
             <Trailer />
             <FilmBlock />
             <Showtimes />

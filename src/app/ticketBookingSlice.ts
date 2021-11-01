@@ -28,7 +28,6 @@ const ticketBookingSlice = createSlice({
             state.ticketRoom = action.payload;
         });
         builder.addCase(bookTicket.fulfilled, (state, action) => {
-            console.log('book ticket thanh cong');
         });
     },
 });

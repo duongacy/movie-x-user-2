@@ -1,33 +1,32 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
-import { Container } from '@mui/material';
-import Table from '@mui/material/Table';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import {
+    Container,
+    Tab,
+    Box,
+    Tabs,
+    Table,
+    TableCell,
+    TableContainer,
+    TableRow,
+    Paper,
+    CardContent,
+    Typography,
+    Grid,
+    Chip,
+    Card,
+} from '@mui/material';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import { useEffect } from 'react';
 import { getUserInfoByAccessToken } from '../../app/accountSlice';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Chip from '@mui/material/Chip';
-import { convertSeat } from '../TiketBooking/TicketBooking';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+import { convertSeat } from '../TiketBooking/TicketBooking';
 
 function TabPanel(props: any) {
     const { children, value, index, ...other } = props;
-
     return (
         <div
             role="tabpanel"
@@ -67,9 +66,6 @@ export default function BasicTabs() {
     useEffect(() => {
         dispatch(getUserInfoByAccessToken(userLocal?.accessToken || ''));
     }, []);
-    useEffect(() => {
-        console.log('bookingInfo:', bookingInfo);
-    }, [bookingInfo]);
 
     return (
         <Container>
@@ -85,7 +81,7 @@ export default function BasicTabs() {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableRow>
                                 <TableCell>{t('account:username')}</TableCell>
-                                <TableCell>{userLocal?.taiKhoan}</TableCell>                               
+                                <TableCell>{userLocal?.taiKhoan}</TableCell>
                             </TableRow>
                             <TableRow>
                                 <TableCell>{t('account:full-name')}</TableCell>
@@ -129,22 +125,28 @@ export default function BasicTabs() {
                                             <Table sx={{ width: '100%' }}>
                                                 <TableRow>
                                                     <TableCell style={{ width: '100px' }}>
-                                                    {t('account:ticket-price')}
+                                                        {t('account:ticket-price')}
                                                     </TableCell>
                                                     <TableCell>{item.giaVe}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell>{t('account:booking-date')}</TableCell>
+                                                    <TableCell>
+                                                        {t('account:booking-date')}
+                                                    </TableCell>
                                                     <TableCell>
                                                         {moment(item.ngayDat).format('DD-MM-YYYY')}
                                                     </TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell>{t('account:movie-duration')}</TableCell>
+                                                    <TableCell>
+                                                        {t('account:movie-duration')}
+                                                    </TableCell>
                                                     <TableCell>{item.thoiLuongPhim} phút</TableCell>
                                                 </TableRow>
                                                 <TableRow>
-                                                    <TableCell>{t('account:ticket-price')}</TableCell>
+                                                    <TableCell>
+                                                        {t('account:ticket-price')}
+                                                    </TableCell>
                                                     <TableCell>{item.giaVe}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
@@ -176,28 +178,6 @@ export default function BasicTabs() {
                                 </Grid>
                             ))}
                         </Grid>
-                        {/* <Card sx={{ minWidth: 275 }}>
-                            <CardContent>
-                                <Typography
-                                    sx={{ fontSize: 14 }}
-                                    color="text.secondary"
-                                    gutterBottom
-                                >
-                                    Word of the Day
-                                </Typography>
-                                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                                    adjective
-                                </Typography>
-                                <Typography variant="body2">
-                                    well meaning and kindly.
-                                    <br />
-                                    {'"a benevolent smile"'}
-                                </Typography>
-                            </CardContent>
-                            <CardActions>
-                                <Button size="small">Learn More</Button>
-                            </CardActions>
-                        </Card> */}
                     </Box>
                 </TabPanel>
             </Box>

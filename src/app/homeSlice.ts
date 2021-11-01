@@ -3,11 +3,9 @@ import { IBanner } from '../formatTypes/Banner';
 import { ICinema } from '../formatTypes/Cinema';
 import { IFilm } from '../formatTypes/Film';
 import { IMultiplex } from '../formatTypes/Multiplex';
-import { IShowtimes } from '../formatTypes/Showtimes';
 import {
     getAllFilmService,
     getBannerService,
-    getShowtimeByFilmService,
 } from '../services/film.services';
 import { getAllMultiplexService } from '../services/multiplex.services';
 import { getAllShowtimeByMultiplexService } from '../services/showtimes.services';
@@ -80,19 +78,16 @@ const homeSlice = createSlice({
 
         builder.addCase(getAllShowtimeByMultiplex.fulfilled, (state, action) => {
             state.cinemas = action.payload[0].lstCumRap;
-            console.log('showtimes ne:', action);
         });
 
         builder.addCase(getAllFilm.fulfilled, (state, action) => {
             state.films = action.payload;
             state.showingFilms = action.payload.filter((item: IFilm) => item.dangChieu === true);
-            console.log('showing:', state.showingFilms);
 
             state.comingFilms = action.payload.filter((item: IFilm) => item.sapChieu === true);
         });
         builder.addCase(getBanners.fulfilled, (state, action) => {
             state.banners = action.payload;
-            console.log(' action.payload:', action.payload);
         });
     },
 });

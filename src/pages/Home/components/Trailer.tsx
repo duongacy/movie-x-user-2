@@ -1,8 +1,7 @@
-import { Ratio } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import Carousel from 'react-elastic-carousel';
 import { Paper, Button } from '@material-ui/core';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBanners } from '../../../app/homeSlice';
 import { RootState } from '../../../app/store';
@@ -15,7 +14,6 @@ const Trailer = (props: ITrailerProps) => {
     useEffect(() => {
         dispatch(getBanners());
     }, []);
-    
 
     return (
         <Box sx={{ mb: '2rem' }}>

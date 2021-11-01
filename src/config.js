@@ -3,3 +3,5 @@ export const TOKEN_CYBERSOFT =
 export const MA_NHOM = 'GP01';
 
 export const BASE_URL = 'https://movienew.cybersoft.edu.vn/';
+
+export const userLocal = JSON.parse(localStorage.getItem('userLocal'));

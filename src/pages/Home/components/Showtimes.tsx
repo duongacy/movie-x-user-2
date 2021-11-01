@@ -3,18 +3,25 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllMultiplex, getAllShowtimeByMultiplex } from '../../../app/homeSlice';
 import { RootState } from '../../../app/store';
-import { ICinema } from '../../../formatTypes/Cinema';
 import { Link } from 'react-router-dom';
 import { IFilm } from '../../../formatTypes/Film';
-import Box from '@mui/material/Box';
-import { Container } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { CardMedia, Grid, CardContent, Typography, CardActions, Card, Button } from '@mui/material';
+import {
+    Box,
+    InputLabel,
+    Container,
+    MenuItem,
+    FormControl,
+    Select,
+    CardMedia,
+    Grid,
+    CardContent,
+    Typography,
+    CardActions,
+    Card,
+    Button,
+} from '@mui/material';
+import { SelectChangeEvent } from '@mui/material/Select';
 import { useTranslation } from 'react-i18next';
-
 
 interface IShowtimesProps {}
 
@@ -30,10 +37,6 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
         dispatch(getAllMultiplex());
     }, []);
 
-    useEffect(() => {
-        console.log('film ne:', films);
-    }, [films]);
-
     const handleSelectMultiplex = (event: SelectChangeEvent) => {
         const { value } = event.target;
         setMultiplexSelectedId(value);
@@ -48,7 +51,7 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
     };
 
     return (
-        <Container>
+        <Container sx={{ paddingBottom: '3rem' }}>
             <Typography
                 variant="h4"
                 sx={{
@@ -65,7 +68,9 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                 <Grid container spacing={2}>
                     <Grid item xs={4}>
                         <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
-                            <InputLabel id="demo-simple-select-label">{t('home:theater-system')}</InputLabel>
+                            <InputLabel id="demo-simple-select-label">
+                                {t('home:theater-system')}
+                            </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
@@ -81,7 +86,9 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                             </Select>
                         </FormControl>
                         <FormControl fullWidth sx={{ marginBottom: '1rem' }}>
-                            <InputLabel id="demo-simple-select-label-2">{t('home:cinema')}</InputLabel>
+                            <InputLabel id="demo-simple-select-label-2">
+                                {t('home:cinema')}
+                            </InputLabel>
                             <Select
                                 labelId="demo-simple-select-label-2"
                                 value={cinemaSelectedId}
@@ -95,18 +102,6 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                                 ))}
                             </Select>
                         </FormControl>
-
-                        {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <Stack spacing={3}>
-                                <MobileDatePicker
-                                    label="Date mobile"
-                                    inputFormat="MM/dd/yyyy"
-                                    value={valueDate}
-                                    onChange={handleChangeDate}
-                                    renderInput={(params) => <TextField {...params} />}
-                                />
-                            </Stack>
-                        </LocalizationProvider> */}
                     </Grid>
                     <Grid
                         item
@@ -152,25 +147,27 @@ const Showtimes: React.FC<IShowtimesProps> = (props) => {
                                         {item.lstLichChieuTheoPhim.map((item, key) => {
                                             if (key < 8)
                                                 return (
-                                                    <Button
+                                                    <Link
+                                                        to={`/ticket-booking/${item.maLichChieu}`}
                                                         style={{
+                                                            textDecoration: 'none',
                                                             maxWidth: '200px',
                                                         }}
-                                                        variant="contained"
-                                                        key={`lichchieu-${key}`}
+                                                        key={`ticket-booking-${key}`}
                                                     >
-                                                        {moment(item.ngayChieuGioChieu).format(
-                                                            'HH:MM'
-                                                        )}
-                                                    </Button>
+                                                        <Button
+                                                            variant="contained"
+                                                            style={{ width: '100%' }}
+                                                        >
+                                                            {moment(item.ngayChieuGioChieu).format(
+                                                                'HH:MM'
+                                                            )}
+                                                        </Button>
+                                                    </Link>
                                                 );
                                         })}
                                     </Box>
                                 </CardContent>
-                                <CardActions>
-                                    <Button size="small">{t('home:details')}</Button>
-                                    <Button size="small">{t('home:booking')}</Button>
-                                </CardActions>
                             </Card>
                         ))}
                     </Grid>
